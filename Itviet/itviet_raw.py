@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 # CONFIG
 # =========================================================
 
-BASE_URL = "https://www.vietnamworks.com/"
+BASE_URL = "https://itviec.com"
 START_URL = "https://itviec.com/it-jobs"
 
 HEADERS = {

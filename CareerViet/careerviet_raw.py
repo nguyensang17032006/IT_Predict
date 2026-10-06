@@ -23,7 +23,7 @@ except ImportError:
 # =========================================================
 
 BASE_URL = "https://careerviet.vn/"
-START_URL = "https://careerviet.vn/viec-lam/ai-engineer-kc63,1-vi.html"
+START_URL = "https://careerviet.vn/viec-lam/cntt-phan-mem-cntt-phan-cung-mang-c1,63-vi.html"
 
 HEADERS = {
     "User-Agent": (

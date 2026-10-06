@@ -38,7 +38,7 @@ except ImportError:
 
 BASE_URL = "https://www.vietnamworks.com/"
 
-START_URL = "https://www.vietnamworks.com/viec-lam?q=ai-engineer&g=5"
+START_URL = "https://www.vietnamworks.com/viec-lam?g=5"
 
 HEADERS = {
 
@@ -178,6 +178,18 @@ def unique_keep_order(values):
 
 # =========================================================
 
+def normalize_browser_url(url):
+    """Loại escape do Markdown/paste trước khi đưa URL cho Selenium/requests."""
+    if url is None:
+        return ""
+    return (
+        str(url)
+        .strip()
+        .replace("\\:", ":")
+        .replace("\\/", "/")
+        .replace("\\.", ".")
+    )
+
 def _build_search_driver():
 
     from selenium import webdriver
@@ -236,11 +248,11 @@ def _extract_job_links_from_html(html):
 
     # Ví dụ: "canonical":"ai-enablement-engineer-2107871-jv"
 
-    decoded = html.replace(r"\\\\\\\\/", "/")
+    decoded = html.replace(r"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/", "/")
 
     for m in re.finditer(
 
-        r'["\\\\\\\\\\\\]canonical["\\\\\\\\\\\\]\s*:\s*["\\\\\\\\\\\\]\\\\([^"\\\\\\\\\\\\]+-\d+-jv)',
+        r'["\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\]canonical["\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\]\s*:\s*["\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\]\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\([^"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\]+-\d+-jv)',
 
         decoded,
 
@@ -254,7 +266,7 @@ def _extract_job_links_from_html(html):
 
     for m in re.finditer(
 
-        r'(?:(?:https?://(?:www\\\\\.)?vietnamworks\\\\\.com)?/)?'
+        r'(?:(?:https?://(?:www\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.)?vietnamworks\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.com)?/)?'
 
         r'([a-zA-Z0-9][a-zA-Z0-9._%+-]*(?:-[a-zA-Z0-9._%+]+)*-\d+-jv)',
 
@@ -268,7 +280,7 @@ def _extract_job_links_from_html(html):
 
     return links
 
-def _extract_vnw_search_result_links(driver):
+def _extract_vnw_search_result_links(driver, log_rejected=False):
 
     """
 
@@ -360,7 +372,7 @@ def get_job_links_from_page(url, driver=None):
 
         try:
 
-            driver.get(url)
+            driver.get(normalize_browser_url(url))
 
         except Exception as e:
 
@@ -413,7 +425,9 @@ def get_job_links_from_page(url, driver=None):
         print(f"  -> Link trong search-result cards: {len(job_urls)}")
 
         if not job_urls:
+
             print("  ⚠ Không xác định được job-card search results.")
+
             print("  ⚠ Không quét toàn trang để tránh Recommended/Ads.")
 
         return sorted(job_urls)
@@ -430,49 +444,207 @@ def get_job_links_from_page(url, driver=None):
 
             driver.quit()
 
+def _find_vnw_pagination_button(driver, target_text):
+    """Tìm đúng button/a trong cụm pagination VietnamWorks."""
+    candidates = []
+
+    try:
+        elements = driver.find_elements(By.CSS_SELECTOR, "button, a")
+    except Exception:
+        return None
+
+    for el in elements:
+        try:
+            text = (el.text or "").strip()
+
+            if text != str(target_text):
+                continue
+
+            if not el.is_displayed() or not el.is_enabled():
+                continue
+
+            disabled = (
+                el.get_attribute("disabled") is not None
+                or (el.get_attribute("aria-disabled") or "").lower() == "true"
+                or "disabled" in (el.get_attribute("class") or "").lower()
+            )
+            if disabled:
+                continue
+
+            score = driver.execute_script(
+                """
+                const el = arguments[0];
+                let node = el;
+                let best = 0;
+
+                for (let depth = 0; depth < 6 && node; depth++, node = node.parentElement) {
+                    const controls = [...node.querySelectorAll('button, a')];
+                    const texts = controls
+                        .map(x => (x.innerText || x.textContent || '').trim())
+                        .filter(Boolean);
+
+                    const numericCount = texts.filter(x => /^\\d+$/.test(x)).length;
+                    const hasArrow = texts.some(x => ['>', '›', '»'].includes(x));
+
+                    if (numericCount >= 2) {
+                        best = Math.max(best, numericCount + (hasArrow ? 10 : 0));
+                    }
+                }
+
+                return best;
+                """,
+                el,
+            )
+
+            if score:
+                candidates.append((score, el))
+
+        except Exception:
+            continue
+
+    if not candidates:
+        return None
+
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    return candidates[0][1]
+
+def _vnw_go_to_next_page(driver, current_page, old_links):
+    """
+    Sang page current_page + 1.
+    Ưu tiên click số trang kế tiếp.
+    Nếu số chưa hiện thì click đúng nút > của pagination.
+    Chỉ thành công khi danh sách job-card thực sự đổi.
+    """
+    target_page = current_page + 1
+    old_signature = tuple(old_links)
+
+    button = _find_vnw_pagination_button(driver, str(target_page))
+    clicked_label = str(target_page)
+
+    if button is None:
+        button = _find_vnw_pagination_button(driver, ">")
+        clicked_label = ">"
+
+    if button is None:
+        print(f"  -> Không tìm thấy nút page {target_page} hoặc nút >.")
+        return False
+
+    try:
+        driver.execute_script(
+            "arguments[0].scrollIntoView({block:'center'});",
+            button,
+        )
+        time.sleep(0.4)
+
+        try:
+            button.click()
+        except Exception:
+            driver.execute_script("arguments[0].click();", button)
+
+        def page_really_changed(d):
+            try:
+                new_links = _extract_vnw_search_result_links(d)
+                return bool(new_links) and tuple(new_links) != old_signature
+            except Exception:
+                return False
+
+        WebDriverWait(driver, 20).until(page_really_changed)
+
+        new_links = _extract_vnw_search_result_links(driver)
+
+        if not new_links or tuple(new_links) == old_signature:
+            print(f"  -> Click {clicked_label} nhưng job-card không đổi.")
+            return False
+
+        print(f"  -> Đã chuyển thật sang page {target_page}.")
+        return True
+
+    except Exception as e:
+        print(
+            f"  -> Không chuyển được page {current_page} -> {target_page}: "
+            f"{type(e).__name__}"
+        )
+        return False
+
 def collect_all_job_links():
-
-    all_links = set()
-
+    """
+    1. Mở START_URL một lần.
+    2. Lấy toàn bộ job link page hiện tại.
+    3. Chuyển thật sang page kế tiếp bằng pagination UI.
+    4. Chỉ tăng page khi job-card đã thay đổi.
+    5. Gom hết URL rồi mới crawl detail.
+    """
+    all_links = []
+    seen = set()
     driver = None
 
     try:
-
         driver = _build_search_driver()
 
-        for page in range(1, MAX_PAGES + 1):
+        print(f"Mở search/filter: {normalize_browser_url(START_URL)}")
+        driver.get(normalize_browser_url(START_URL))
 
-            page_url = set_page(START_URL, page)
+        try:
+            WebDriverWait(driver, 20).until(
+                lambda d: len(_extract_vnw_search_result_links(d)) > 0
+            )
+        except Exception:
+            pass
 
-            print(f"\nĐang đọc page {page}")
+        page = 1
 
-            print(page_url)
+        while page <= MAX_PAGES:
+            print(f"\nĐang đọc UI page {page}")
+            print(f"URL hiện tại: {driver.current_url}")
 
-            links = get_job_links_from_page(page_url, driver=driver)
+            links = _extract_vnw_search_result_links(
+                driver,
+                log_rejected=True,
+            )
 
-            new_links = [link for link in links if link not in all_links]
-
-            print(f"Tìm thấy: {len(links)} job")
-
-            print(f"Job mới: {len(new_links)}")
-
-            if not new_links:
-
-                print("Không còn job mới. Dừng crawl page.")
-
+            if not links:
+                print(
+                    "Không đọc được job-card ở page hiện tại. "
+                    "Dừng để tránh lấy Recommended/Ads."
+                )
                 break
 
-            all_links.update(new_links)
+            new_links = [url for url in links if url not in seen]
 
+            print(f"Tìm thấy: {len(links)} job")
+            print(f"Job mới: {len(new_links)}")
+
+            if page > 1 and not new_links:
+                print(
+                    "  -> Pagination chưa đổi thật vì toàn bộ URL vẫn trùng. "
+                    "Dừng, không tăng page giả."
+                )
+                break
+
+            for url in new_links:
+                seen.add(url)
+                all_links.append(url)
+
+            print(f"Tổng URL đã gom: {len(all_links)}")
+
+            old_links = list(links)
+
+            if not _vnw_go_to_next_page(driver, page, old_links):
+                print("Đã tới trang cuối hoặc không thể chuyển page kế tiếp.")
+                break
+
+            page += 1
             time.sleep(REQUEST_DELAY)
 
     finally:
-
         if driver is not None:
+            try:
+                driver.quit()
+            except Exception:
+                pass
 
-            driver.quit()
-
-    return sorted(all_links)
+    print(f"\nTổng job link lấy từ search/filter hiện tại: {len(all_links)}")
+    return all_links
 
 def load_or_collect_links():
 
@@ -566,7 +738,7 @@ def load_or_collect_links():
 
     print(f"Đã cập nhật {LINKS_FILE}")
 
-    # Return all links; main() will filter already-crawled jobs before detail requests.
+    # Chỉ trả link của START_URL hiện tại; LINKS_FILE chỉ giữ lịch sử.
 
     return crawled_links  # chỉ crawl kết quả START_URL hiện tại
 
@@ -593,23 +765,26 @@ def _extract_next_f_stream(html_text):
             pos = i
             continue
 
-        # Parse đúng một JSON string, kể cả khi bên trong có escape.
         j = i + 1
         escaped = False
+
         while j < len(html_text):
             ch = html_text[j]
+
             if escaped:
                 escaped = False
-            elif ch == '\\':
+            elif ch == "\\":
                 escaped = True
             elif ch == '"':
                 break
+
             j += 1
 
         if j >= len(html_text):
             break
 
         literal = html_text[i:j + 1]
+
         try:
             chunks.append(json.loads(literal))
         except json.JSONDecodeError:
@@ -620,191 +795,494 @@ def _extract_next_f_stream(html_text):
     return "".join(chunks)
 
 def _parse_rsc_records(stream):
-
-    """Parse record Next.js Flight: JSON record và text record dạng id:T<hex_length>,text."""
-
+    """Parse các record React/Next Flight: id:JSON và id:T<hex>,text."""
     records = {}
-
+    decoder = json.JSONDecoder()
     i = 0
-
     n = len(stream)
 
-    decoder = json.JSONDecoder()
-
     while i < n:
-
-        # Record id nằm ở đầu dòng: 26:, 2a:, 34: ...
-
-        m = re.match(r'([0-9a-f]+):', stream[i:], re.IGNORECASE)
+        m = re.match(r"([0-9a-f]+):", stream[i:], re.IGNORECASE)
 
         if not m:
-
-            nl = stream.find('\n', i)
-
+            nl = stream.find("\n", i)
             i = n if nl == -1 else nl + 1
-
             continue
 
         rid = m.group(1).lower()
-
         pos = i + m.end()
 
-        # Text record: 27:Tf25,\\\\\\\\\\\\<f25 ký tự>
-
-        tm = re.match(r'T([0-9a-f]+),', stream[pos:], re.IGNORECASE)
-
+        tm = re.match(r"T([0-9a-f]+),", stream[pos:], re.IGNORECASE)
         if tm:
-
             length = int(tm.group(1), 16)
-
             text_start = pos + tm.end()
-
             records[rid] = stream[text_start:text_start + length]
-
             i = text_start + length
 
-            if i < n and stream[i] == '\n':
-
+            if i < n and stream[i] == "\n":
                 i += 1
-
             continue
 
         try:
-
             value, consumed = decoder.raw_decode(stream[pos:])
-
             records[rid] = value
-
             i = pos + consumed
 
-            if i < n and stream[i] == '\n':
-
+            if i < n and stream[i] == "\n":
                 i += 1
-
         except json.JSONDecodeError:
-
-            nl = stream.find('\n', pos)
-
+            nl = stream.find("\n", pos)
             i = n if nl == -1 else nl + 1
 
-    # Một số text record của React Flight nối sát record trước, không có \n.
-
-    # Quét bổ sung toàn stream để không mất $27/$28 hoặc record ngay sau text.
-
-    for tm in re.finditer(r'([0-9a-f]+):T([0-9a-f]+),', stream, re.IGNORECASE):
-
+    # Bổ sung text records bị nối sát.
+    for tm in re.finditer(r"([0-9a-f]+):T([0-9a-f]+),", stream, re.IGNORECASE):
         rid = tm.group(1).lower()
-
         length = int(tm.group(2), 16)
-
         records[rid] = stream[tm.end():tm.end() + length]
 
-    # Quét bổ sung các JSON object/list record chưa bắt được.
-
-    for jm in re.finditer(r'([0-9a-f]+):(?=[\\\\\\\\[{])', stream, re.IGNORECASE):
-
+    # Bổ sung JSON object/list records.
+    for jm in re.finditer(r"([0-9a-f]+):(?=[\[{])", stream, re.IGNORECASE):
         rid = jm.group(1).lower()
 
         if rid in records:
-
             continue
 
         try:
-
             value, _ = decoder.raw_decode(stream[jm.end():])
-
             records[rid] = value
-
         except json.JSONDecodeError:
-
             pass
 
     return records
 
 def _resolve_rsc(value, records, seen=None):
-
-    """Resolve $27, $29, $34... thành dữ liệu thật; chống vòng lặp."""
-
+    """Resolve $2c, $29, $2a... thành dữ liệu thật."""
     if seen is None:
-
         seen = set()
 
-    if isinstance(value, str) and re.fullmatch(r'\\\\\\\\$[0-9a-f]+', value, re.IGNORECASE):
+    if isinstance(value, str):
+        m = re.fullmatch(r"\$([0-9a-f]+)", value.strip(), re.IGNORECASE)
 
-        rid = value[1:].lower()
+        if m:
+            rid = m.group(1).lower()
 
-        if rid in seen or rid not in records:
+            if rid in seen or rid not in records:
+                return value
 
-            return value
+            return _resolve_rsc(
+                records[rid],
+                records,
+                seen | {rid},
+            )
 
-        return _resolve_rsc(records[rid], records, seen | {rid})
+        return value
 
     if isinstance(value, list):
-
-        return [_resolve_rsc(v, records, seen) for v in value]
+        return [
+            _resolve_rsc(v, records, seen.copy())
+            for v in value
+        ]
 
     if isinstance(value, dict):
-
-        return {k: _resolve_rsc(v, records, seen) for k, v in value.items()}
+        return {
+            k: _resolve_rsc(v, records, seen.copy())
+            for k, v in value.items()
+        }
 
     return value
 
 def _find_job_object(records):
 
-    # Không phụ thuộc record id = 26 vì id có thể đổi giữa các request/build.
+    """Tìm job object đệ quy trong toàn bộ Next.js Flight records."""
 
     candidates = []
 
-    for rid, value in records.items():
+    def walk(value):
 
-        if isinstance(value, dict) and value.get("jobId") and value.get("jobTitle"):
+        if isinstance(value, dict):
 
-            candidates.append(value)
+            # VietnamWorks có thể bọc job ở nhiều tầng data/job/pageProps/...
+
+            if value.get("jobId") and (
+
+                value.get("jobTitle")
+
+                or value.get("title")
+
+                or value.get("jobUrl")
+
+            ):
+
+                candidates.append(value)
+
+            for child in value.values():
+
+                if isinstance(child, (dict, list)):
+
+                    walk(child)
+
+        elif isinstance(value, list):
+
+            for child in value:
+
+                if isinstance(child, (dict, list)):
+
+                    walk(child)
+
+    for value in records.values():
+
+        walk(value)
 
     if not candidates:
 
         return None
 
-    # Ưu tiên object đầy đủ nhất.
+    # Ưu tiên object giàu dữ liệu nhất.
 
     return max(candidates, key=lambda x: len(x))
 
-def get_jobposting(url):
+def _find_job_object_deep(value):
+
+    candidates = []
+
+    def walk(v):
+
+        if isinstance(v, dict):
+
+            score = 0
+
+            if v.get("jobId"):
+
+                score += 4
+
+            if v.get("jobTitle"):
+
+                score += 4
+
+            if v.get("companyName"):
+
+                score += 2
+
+            if "skills" in v:
+
+                score += 2
+
+            if score >= 6:
+
+                candidates.append((score, len(v), v))
+
+            for child in v.values():
+
+                if isinstance(child, (dict, list)):
+
+                    walk(child)
+
+        elif isinstance(v, list):
+
+            for child in v:
+
+                if isinstance(child, (dict, list)):
+
+                    walk(child)
+
+    walk(value)
+
+    if not candidates:
+
+        return None
+
+    return max(candidates, key=lambda x: (x[0], x[1]))[2]
+
+def _find_jsonld_jobposting(html_text):
+
+    """Ưu tiên schema.org JobPosting giống cách CareerViet đang làm."""
+
+    soup = BeautifulSoup(html_text, "html.parser")
+
+    for script in soup.find_all("script", type="application/ld+json"):
+
+        raw = script.string or script.get_text()
+
+        if not raw or not raw.strip():
+
+            continue
+
+        try:
+
+            data = json.loads(raw)
+
+        except Exception:
+
+            continue
+
+        candidates = data if isinstance(data, list) else [data]
+
+        for item in candidates:
+
+            if not isinstance(item, dict):
+
+                continue
+
+            if item.get("@type") == "JobPosting":
+
+                return item
+
+            graph = item.get("@graph")
+
+            if isinstance(graph, list):
+
+                for obj in graph:
+
+                    if isinstance(obj, dict) and obj.get("@type") == "JobPosting":
+
+                        return obj
+
+    return None
+
+def _jsonld_to_vnw(data, url):
+
+    """
+
+    Chuẩn hóa JobPosting JSON-LD của VietnamWorks về các key mà pipeline cũ dùng.
+
+    Không dùng các ref kiểu $2c/$29 làm skills.
+
+    """
+
+    org = data.get("hiringOrganization") or {}
+
+    if not isinstance(org, dict):
+
+        org = {}
+
+    locations = data.get("jobLocation") or []
+
+    if not isinstance(locations, list):
+
+        locations = [locations]
+
+    working_locations = []
+
+    for loc in locations:
+
+        if not isinstance(loc, dict):
+
+            continue
+
+        address = loc.get("address") or {}
+
+        if not isinstance(address, dict):
+
+            address = {}
+
+        city = (
+
+            address.get("addressLocality")
+
+            or address.get("addressRegion")
+
+            or address.get("streetAddress")
+
+        )
+
+        working_locations.append({
+
+            "address": address.get("streetAddress"),
+
+            "cityName": city,
+
+            "cityNameVI": city,
+
+            "cityId": None,
+
+        })
+
+    base = data.get("baseSalary") or {}
+
+    if not isinstance(base, dict):
+
+        base = {}
+
+    salary_value = base.get("value") or {}
+
+    if not isinstance(salary_value, dict):
+
+        salary_value = {}
+
+    raw_skills = data.get("skills") or data.get("qualifications") or []
+
+    if isinstance(raw_skills, str):
+
+        # Chỉ tách separator rõ ràng, không phá tên skill.
+
+        raw_skills = [
+
+            x.strip()
+
+            for x in re.split(r"[,;|\n]+", raw_skills)
+
+            if x.strip()
+
+        ]
+
+    identifier = data.get("identifier") or {}
+
+    if isinstance(identifier, dict):
+
+        job_id = identifier.get("value")
+
+    else:
+
+        job_id = identifier
+
+    return {
+
+        "jobId": str(job_id or extract_job_id(url) or ""),
+
+        "jobTitle": data.get("title"),
+
+        "companyName": org.get("name"),
+
+        "jobDescription": data.get("description") or "",
+
+        "jobRequirement": data.get("qualifications") or "",
+
+        "skills": raw_skills,
+
+        "workingLocations": working_locations,
+
+        "jobLevel": data.get("experienceRequirements"),
+
+        "jobLevelVI": None,
+
+        "yearsOfExperience": None,
+
+        "typeWorkingId": data.get("employmentType"),
+
+        "approvedOn": data.get("datePosted"),
+
+        "createdOn": data.get("datePosted"),
+
+        "expiredOn": data.get("validThrough"),
+
+        "prettySalary": None,
+
+        "prettySalaryVI": None,
+
+        "_jsonld_base_salary": {
+
+            "currency": base.get("currency"),
+
+            "minValue": salary_value.get("minValue"),
+
+            "maxValue": salary_value.get("maxValue"),
+
+            "value": salary_value.get("value"),
+
+            "unitText": salary_value.get("unitText"),
+
+        },
+
+        "_source_format": "jsonld",
+
+    }
+
+def _extract_job_from_html(html_text, url):
+
+    # 1. JSON-LD trước: sạch, không có React Flight refs.
+
+    jsonld = _find_jsonld_jobposting(html_text)
+
+    if jsonld:
+
+        return _jsonld_to_vnw(jsonld, url)
+
+    # 2. Fallback Next.js Flight.
+
+    stream = _extract_next_f_stream(html_text)
+
+    if not stream:
+
+        return None
+
+    records = _parse_rsc_records(stream)
+
+    if not records:
+
+        return None
+
+    resolved_records = {
+
+        rid: _resolve_rsc(value, records)
+
+        for rid, value in records.items()
+
+    }
+
+    data = _find_job_object_deep(resolved_records)
+
+    if not data:
+
+        return None
+
+    data = _resolve_rsc(data, records)
+
+    if isinstance(data, dict):
+
+        data["_rsc_records"] = records
+
+        data["_source_format"] = "next_flight"
+
+    return data
+
+def get_jobposting(url, driver=None):
+    """
+    VietnamWorks detail:
+    1) requests trước;
+    2) nếu HTML requests không có payload đầy đủ thì dùng Cốc Cốc đã mở sẵn;
+    3) KHÔNG tạo browser mới cho từng job.
+    """
+    try:
+        response = session.get(normalize_browser_url(url), timeout=25)
+
+        if response.status_code == 200:
+            data = _extract_job_from_html(response.text, url)
+            if data:
+                return data
+    except Exception:
+        pass
+
+    if driver is None:
+        print(f"Không có detail driver cho: {url}")
+        return None
 
     try:
+        try:
+            driver.get(normalize_browser_url(url))
+        except Exception:
+            # Có trường hợp page load timeout nhưng DOM/payload đã có.
+            pass
 
-        response = session.get(url, timeout=25)
+        try:
+            WebDriverWait(driver, 12).until(
+                lambda d: d.execute_script("return document.readyState")
+                in ("interactive", "complete")
+            )
+        except Exception:
+            pass
 
-        if response.status_code != 200:
+        time.sleep(1.0)
 
-            print(f"Lỗi job {response.status_code}: {url}")
+        data = _extract_job_from_html(driver.page_source, url)
 
-            return None
+        if data:
+            return data
 
-        stream = _extract_next_f_stream(response.text)
-
-        if not stream:
-
-            print(f"Không tìm thấy Next.js payload: {url}")
-
-            return None
-
-        records = _parse_rsc_records(stream)
-
-        job_data = _find_job_object(records)
-
-        if not job_data:
-
-            print(f"Không tìm thấy job object VietnamWorks: {url}")
-
-            return None
-
-        return _resolve_rsc(job_data, records)
+        print(f"Không tìm thấy JobPosting VietnamWorks: {url}")
+        return None
 
     except Exception as e:
-
         print("Lỗi get_jobposting:", e, url)
-
         return None
 
 # =========================================================
@@ -952,41 +1430,71 @@ def extract_level(title):
 # =========================================================
 
 def extract_experience_range(description):
+
     """Trả về (experience_min, experience_max)."""
+
     text = clean_description(description).lower()
+
     if not text:
+
         return None, None
 
     range_patterns = [
-        r"(?:from\s+)?(\d+)\s*(?:-|–|—|to)\s*(\d+)\s*\+?\s*years?",
+
+        r"(?:from\s+)?(\d+)\s*(?:-|–|—|to)\s*(\d+)\s*\\\\\\\+?\s*years?",
+
         r"(\d+)\s*(?:-|–|—)\s*(\d+)\s*yrs?",
+
     ]
+
     for pattern in range_patterns:
+
         match = re.search(pattern, text, re.IGNORECASE)
+
         if match:
+
             exp_min, exp_max = int(match.group(1)), int(match.group(2))
+
             if 0 <= exp_min <= 30 and 0 <= exp_max <= 30 and exp_min <= exp_max:
+
                 return exp_min, exp_max
 
     min_patterns = [
-        r"at\s+least\s+(\d+)\+?\s*years?",
-        r"minimum\s+(?:of\s+)?(\d+)\+?\s*years?",
-        r"min\.?\s*(\d+)\+?\s*years?",
+
+        r"at\s+least\s+(\d+)\\\\\\\+?\s*years?",
+
+        r"minimum\s+(?:of\s+)?(\d+)\\\\\\\+?\s*years?",
+
+        r"min\.?\s*(\d+)\\\\\\\+?\s*years?",
+
         r"more\s+than\s+(\d+)\s*years?",
+
         r"over\s+(\d+)\s*years?",
-        r"(\d+)\+\s*years?",
+
+        r"(\d+)\\\\\\\+\s*years?",
+
     ]
+
     for pattern in min_patterns:
+
         match = re.search(pattern, text, re.IGNORECASE)
+
         if match:
+
             exp = int(match.group(1))
+
             if 0 <= exp <= 30:
+
                 return exp, None
 
     match = re.search(r"(\d+)\s+years?\s+(?:of\s+)?(?:working\s+)?experience", text, re.IGNORECASE)
+
     if match:
+
         exp = int(match.group(1))
+
         if 0 <= exp <= 30:
+
             return exp, None
 
     return None, None
@@ -1075,7 +1583,7 @@ def extract_job_role(title):
 
         # Language-specific developer
 
-        (".NET Developer", [r"\\\\\.net\b", r"\bc#\b", r"\bdotnet\b"]),
+        (".NET Developer", [r"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.net\b", r"\bc#\b", r"\bdotnet\b"]),
 
         ("PHP Developer", [r"\bphp\b", r"\blaravel\b"]),
 
@@ -1083,7 +1591,7 @@ def extract_job_role(title):
 
         ("Java Developer", [r"\bjava developer\b", r"\bjava engineer\b", r"\bjava lead\b"]),
 
-        ("JavaScript Developer", [r"\bjavascript developer\b", r"\bnode\\\\\.?js developer\b", r"\bnodejs developer\b"]),
+        ("JavaScript Developer", [r"\bjavascript developer\b", r"\bnode\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.?js developer\b", r"\bnodejs developer\b"]),
 
         # Generic application/software
 
@@ -1178,6 +1686,26 @@ def extract_remote(job_data, title, description):
 # =========================================================
 
 def extract_raw_salary(job_data):
+
+    # Salary lấy từ schema.org JobPosting nếu detail được đọc bằng JSON-LD.
+
+    jsonld_salary = job_data.get("_jsonld_base_salary")
+
+    if isinstance(jsonld_salary, dict):
+
+        return {
+
+            "salary_raw_min": jsonld_salary.get("minValue") if jsonld_salary.get("minValue") is not None else jsonld_salary.get("value"),
+
+            "salary_raw_max": jsonld_salary.get("maxValue") if jsonld_salary.get("maxValue") is not None else jsonld_salary.get("value"),
+
+            "salary_currency": jsonld_salary.get("currency"),
+
+            "salary_unit": jsonld_salary.get("unitText"),
+
+            "salary_text": None,
+
+        }
 
     result = {
 
@@ -1319,25 +1847,253 @@ def normalize_salary_from_raw(raw_min, raw_max, currency, unit):
 
 def _extract_skills(job_data):
 
+    """
+
+    Trả về skill cụ thể, ví dụ:
+
+    Python, SQL, AWS, Docker
+
+    Không bao giờ trả về React/Next Flight refs như:
+
+    $2c, $29, $2a...
+
+    """
+
     raw = job_data.get("skills") or []
 
-    if isinstance(raw, list):
+    records = job_data.get("_rsc_records") or {}
 
-        names = []
+    # Nếu skills là Flight ref thì resolve trước.
 
-        for item in raw:
+    raw = _resolve_rsc(raw, records)
 
-            if isinstance(item, dict) and item.get("skillName"):
+    names = []
 
-                names.append(str(item["skillName"]).strip())
+    def add_skill(value):
 
-            elif isinstance(item, str) and not item.startswith("$"):
+        if value is None:
 
-                names.append(item.strip())
+            return
 
-        return ", ".join(unique_keep_order(names))
+        if isinstance(value, str):
 
-    return str(raw) if raw else ""
+            value = clean_description(value).strip()
+
+            if not value:
+
+                return
+
+            # Chặn hoàn toàn $2c / $29 / $2a...
+
+            if re.fullmatch(r"\\$[0-9a-f]+", value, re.IGNORECASE):
+
+                return
+
+            # JSON-LD có thể trả một chuỗi nhiều skill.
+
+            parts = [
+
+                x.strip()
+
+                for x in re.split(r"[,;|\n]+", value)
+
+                if x.strip()
+
+            ]
+
+            for part in parts:
+
+                if not re.fullmatch(r"\\$[0-9a-f]+", part, re.IGNORECASE):
+
+                    names.append(part)
+
+            return
+
+        if isinstance(value, list):
+
+            for item in value:
+
+                add_skill(item)
+
+            return
+
+        if isinstance(value, dict):
+
+            # Các key skill thường gặp của VietnamWorks/JSON-LD.
+
+            for key in ("skillName", "name", "skill", "label", "title"):
+
+                item = value.get(key)
+
+                if isinstance(item, str) and item.strip():
+
+                    add_skill(item)
+
+                    return
+
+            for item in value.values():
+
+                if isinstance(item, (dict, list)):
+
+                    add_skill(item)
+
+    add_skill(raw)
+
+    names = unique_keep_order(names)
+
+    if names:
+
+        return ", ".join(names)
+
+    # Fallback: chỉ lấy skill thật sự xuất hiện trong requirement/description/title.
+
+    text = clean_description(
+
+        " ".join([
+
+            str(job_data.get("jobRequirement") or ""),
+
+            str(job_data.get("jobDescription") or ""),
+
+            str(job_data.get("jobTitle") or ""),
+
+        ])
+
+    )
+
+    skill_patterns = [
+
+        ("Python", r"\bpython\b"),
+
+        ("Java", r"\bjava\b"),
+
+        ("JavaScript", r"\bjavascript\b"),
+
+        ("TypeScript", r"\btypescript\b"),
+
+        ("C++", r"(?\<!\w)c\+\+(?!\w)"),
+
+        ("C#", r"(?\<!\w)c#(?!\w)"),
+
+        (".NET", r"\.net\b|\bdotnet\b"),
+
+        ("PHP", r"\bphp\b"),
+
+        ("Go", r"\bgolang\b|\bgo language\b"),
+
+        ("Kotlin", r"\bkotlin\b"),
+
+        ("Swift", r"\bswift\b"),
+
+        ("Dart", r"\bdart\b"),
+
+        ("SQL", r"\bsql\b"),
+
+        ("MySQL", r"\bmysql\b"),
+
+        ("PostgreSQL", r"\bpostgres(?:ql)?\b"),
+
+        ("Oracle", r"\boracle\b"),
+
+        ("MongoDB", r"\bmongodb\b"),
+
+        ("Redis", r"\bredis\b"),
+
+        ("React", r"\breact(?:\.js|js)?\b"),
+
+        ("Angular", r"\bangular\b"),
+
+        ("Vue.js", r"\bvue(?:\.js|js)?\b"),
+
+        ("Node.js", r"\bnode(?:\.js|js)\b"),
+
+        ("Spring Boot", r"\bspring\s*boot\b"),
+
+        ("Laravel", r"\blaravel\b"),
+
+        ("Flutter", r"\bflutter\b"),
+
+        ("React Native", r"\breact\s*native\b"),
+
+        ("AWS", r"\baws\b|amazon web services"),
+
+        ("Azure", r"\bazure\b"),
+
+        ("GCP", r"\bgcp\b|google cloud"),
+
+        ("Docker", r"\bdocker\b"),
+
+        ("Kubernetes", r"\bkubernetes\b|\bk8s\b"),
+
+        ("Git", r"\bgit\b"),
+
+        ("Linux", r"\blinux\b"),
+
+        ("Jenkins", r"\bjenkins\b"),
+
+        ("CI/CD", r"\bci\s*/\s*cd\b"),
+
+        ("Terraform", r"\bterraform\b"),
+
+        ("Ansible", r"\bansible\b"),
+
+        ("TensorFlow", r"\btensorflow\b"),
+
+        ("PyTorch", r"\bpytorch\b"),
+
+        ("Scikit-learn", r"\bscikit[- ]learn\b|\bsklearn\b"),
+
+        ("Pandas", r"\bpandas\b"),
+
+        ("NumPy", r"\bnumpy\b"),
+
+        ("Machine Learning", r"\bmachine learning\b"),
+
+        ("Deep Learning", r"\bdeep learning\b"),
+
+        ("LLM", r"\bllms?\b|large language model"),
+
+        ("RAG", r"\brag\b|retrieval augmented generation"),
+
+        ("NLP", r"\bnlp\b|natural language processing"),
+
+        ("Computer Vision", r"\bcomputer vision\b"),
+
+        ("Spark", r"\bspark\b"),
+
+        ("Hadoop", r"\bhadoop\b"),
+
+        ("Kafka", r"\bkafka\b"),
+
+        ("Airflow", r"\bairflow\b"),
+
+        ("Power BI", r"\bpower\s*bi\b"),
+
+        ("Tableau", r"\btableau\b"),
+
+        ("REST API", r"\brest(?:ful)?\s+api\b"),
+
+        ("GraphQL", r"\bgraphql\b"),
+
+        ("Selenium", r"\bselenium\b"),
+
+        ("Postman", r"\bpostman\b"),
+
+        ("JMeter", r"\bjmeter\b"),
+
+    ]
+
+    found = [
+
+        name
+
+        for name, pattern in skill_patterns
+
+        if re.search(pattern, text, re.IGNORECASE)
+
+    ]
+
+    return ", ".join(unique_keep_order(found))
 
 def _extract_level_vnw(job_data, title):
 
@@ -1367,9 +2123,9 @@ def _extract_level_vnw(job_data, title):
 
     return "Unknown"
 
-def parse_raw_job(url):
+def parse_raw_job(url, driver=None):
 
-    job_data = get_jobposting(url)
+    job_data = get_jobposting(url, driver=driver)
 
     if not job_data:
 
@@ -1533,7 +2289,7 @@ def process_raw_row(row):
 
             skill_text,
 
-            [r"\bjavascript\b", r"\bjava\s*script\b", r"\bjs\b", r"\bnode\\\\\.?js\b", r"\bnodejs\b"]
+            [r"\bjavascript\b", r"\bjava\s*script\b", r"\bjs\b", r"\bnode\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.?js\b", r"\bnodejs\b"]
 
         ),
 
@@ -1609,11 +2365,11 @@ def main():
 
     print("=" * 70)
 
-    # 1) Luôn crawl START_URL rồi merge vào lịch sử job links.
+    # 1) Giống CareerViet: crawl START_URL/filter hiện tại rồi merge link history.
 
     job_links = load_or_collect_links()
 
-    print(f"\nTổng URL job trong lịch sử: {len(job_links)}")
+    print(f"\nURL thuộc search hiện tại: {len(job_links)}")
 
     # 2) Load RAW cũ để không crawl detail lại.
 
@@ -1663,17 +2419,15 @@ def main():
 
             }
 
-    # Chỉ crawl detail job chưa có trong RAW.
-
-    # Không tự lọc theo keyword sau khi website đã trả job trong search results.
-
     links_to_crawl = []
 
     for url in job_links:
 
-        jid = extract_job_id(url)
+        clean = clean_url(url)
 
-        if clean_url(url) in existing_urls:
+        jid = extract_job_id(clean)
+
+        if clean in existing_urls:
 
             continue
 
@@ -1681,15 +2435,27 @@ def main():
 
             continue
 
-        links_to_crawl.append(url)
+        links_to_crawl.append(clean)
 
-    print(f"Job đã có trong RAW       : {len(job_links) - len(links_to_crawl)}")
+    links_to_crawl = unique_keep_order(links_to_crawl)
 
-    print(f"Job detail cần crawl mới  : {len(links_to_crawl)}")
+    print(f"Job thuộc search hiện tại : {len(job_links)}")
+
+    print(f"Job detail mới cần crawl  : {len(links_to_crawl)}")
 
     new_rows = []
 
     total = len(links_to_crawl)
+
+    # VietnamWorks cần browser-rendered payload ở nhiều detail page.
+    # Chỉ mở Cốc Cốc 1 lần rồi tái sử dụng cho toàn bộ job.
+    detail_driver = None
+
+    if total > 0:
+        try:
+            detail_driver = _build_search_driver()
+        except Exception as e:
+            print("Không khởi động được Cốc Cốc cho detail:", e)
 
     for index, url in enumerate(links_to_crawl, start=1):
 
@@ -1697,7 +2463,7 @@ def main():
 
         try:
 
-            row = parse_raw_job(url)
+            row = parse_raw_job(url, driver=detail_driver)
 
             if row:
 
@@ -1711,7 +2477,13 @@ def main():
 
                 )
 
-                print("   ✓ Đã lưu raw" + (" + salary" if has_salary else " (không có salary)"))
+                print(
+
+                    "   ✓ Đã lưu raw"
+
+                    + (" + salary" if has_salary else " (không có salary)")
+
+                )
 
             else:
 
@@ -1721,7 +2493,7 @@ def main():
 
             print("   ✗ Lỗi:", e)
 
-        # Autosave theo kiểu MERGE, không bao giờ overwrite RAW cũ chỉ bằng batch mới.
+        # Autosave merge, không overwrite RAW cũ bằng riêng batch mới.
 
         if new_rows and index % 20 == 0:
 
@@ -1731,15 +2503,29 @@ def main():
 
             temp_raw = temp_raw.drop_duplicates(
 
-                subset=["source", "job_id", "url"], keep="last"
+                subset=["source", "job_id", "url"],
+
+                keep="last"
 
             )
 
-            temp_raw.to_csv(RAW_FILE, index=False, encoding="utf-8-sig")
+            temp_raw.to_csv(
 
-            print(f"   💾 Autosave merge {RAW_FILE}: {len(temp_raw)} job")
+                RAW_FILE,
 
-        time.sleep(REQUEST_DELAY)
+                index=False,
+
+                encoding="utf-8-sig"
+
+            )
+
+            print(f"   -> Autosave {len(temp_raw)} raw rows")
+
+    if detail_driver is not None:
+        try:
+            detail_driver.quit()
+        except Exception:
+            pass
 
     # 3) Merge RAW cũ + job mới.
 
@@ -1882,4 +2668,3 @@ def main():
 if __name__ == "__main__":
 
     main()
-

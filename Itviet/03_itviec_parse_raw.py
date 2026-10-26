@@ -138,6 +138,43 @@ def extract_raw_locations(job_data):
 
     return locations
 
+def extract_job_location_type_from_html(file_path):
+    html = file_path.read_text(
+        encoding="utf-8",
+        errors="ignore"
+    )
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    # ITviec hiển thị kiểu làm việc:
+    # At office / Hybrid / Remote
+    spans = soup.select(
+        "span.normal-text.text-rich-grey.ms-1"
+    )
+
+    found = []
+
+    for span in spans:
+        text = span.get_text(
+            " ",
+            strip=True
+        )
+
+        low = text.lower()
+
+        if (
+            "at office" in low
+            or "hybrid" in low
+            or "remote" in low
+        ):
+            found.append(text)
+
+    found = unique_keep_order(found)
+
+    if not found:
+        return None
+
+    return "; ".join(found)
 
 def normalize_region_name(value):
     if not value:
@@ -313,6 +350,8 @@ def parse_raw_job(file_path, link_info):
     raw_salary = extract_raw_salary(job_data)
     exp_min, exp_max = extract_experience_range(description_html)
 
+    job_location_type = extract_job_location_type_from_html(file_path)
+
     return {
         "job_id": str(link_info.get("job_id") or file_path.stem),
         "title": title,
@@ -332,7 +371,7 @@ def parse_raw_job(file_path, link_info):
         "posted_date": job_data.get("datePosted"),
         "valid_through": job_data.get("validThrough"),
         "description": description_text,
-        "job_location_type": job_data.get("jobLocationType"),
+        "job_location_type": job_location_type,
         "source": "ITviec",
         "url": clean_url(link_info.get("url")),
         "status": link_info.get("status", "active"),

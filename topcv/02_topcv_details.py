@@ -1,8 +1,22 @@
+"""Refresh active TopCV jobs once per Vietnam calendar day.
+Install: pip install playwright pandas
+Then: python -m playwright install chromium
+Run beside topcv_job_links.csv, before step 03.
+Fetch and validate each page; atomically overwrite only if HTML bytes changed.
+Failed requests never replace the old HTML. Identical HTML keeps its file mtime.
+Writes topcv_download_report.json for the latest run (no extra CSV).
+Successful check dates and HTML hashes live in the report, independent of file mtime.
+Set FORCE_REFRESH=True to check again within the same day.
+HTML changes can include dynamic markup, not just changes in job fields.
+"""
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
+import hashlib
+import json
+import re
 import time
 
 import pandas as pd
-from playwright.sync_api import sync_playwright
 
 
 # =========================================================
@@ -13,8 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent
 
 INPUT_FILE = BASE_DIR / "topcv_job_links.csv"
 DETAIL_FOLDER = BASE_DIR / "details"
+REPORT_FILE = BASE_DIR / "topcv_download_report.json"
+SITE_TZ = timezone(timedelta(hours=7))
+FORCE_REFRESH = False  # True: check every active job again, even if checked today.
 
-DETAIL_FOLDER.mkdir(parents=True, exist_ok=True)
 
 REQUEST_DELAY = 2
 
@@ -24,6 +40,65 @@ RETRY_DELAY = 5
 
 # Các HTTP status được xem là block/rate-limit.
 BLOCK_STATUS = {403, 419, 429}
+
+
+SUCCESS_RESULTS = {"created", "updated", "unchanged"}
+
+
+def now_text():
+    return datetime.now(SITE_TZ).isoformat(timespec="seconds")
+
+
+def file_hash(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read_success_cache():
+    if not REPORT_FILE.is_file():
+        return {}
+    try:
+        report = json.loads(REPORT_FILE.read_text(encoding="utf-8"))
+        cache = report.get("success_cache", {})
+        return cache if isinstance(cache, dict) else {}
+    except (OSError, ValueError, AttributeError):
+        print("Không đọc được lịch sử tải; sẽ kiểm tra lại các tin active.")
+        return {}
+
+
+def already_checked_today(path, url, previous):
+    if FORCE_REFRESH or not path.is_file() or not isinstance(previous, dict):
+        return False
+    if previous.get("url") != url:
+        return False
+    try:
+        success = datetime.fromisoformat(previous.get("last_success_at", ""))
+        now = datetime.fromisoformat(now_text())
+        if success.tzinfo is None or success > now:
+            return False
+        if success.astimezone(SITE_TZ).date() != now.astimezone(SITE_TZ).date():
+            return False
+        # A changed, replaced, deleted or truncated local file must be downloaded again.
+        return previous.get("html_sha256") == file_hash(path)
+    except (OSError, ValueError, TypeError):
+        return False
+
+
+def save_html_if_changed(output_path, html):
+    """Called only after validating the fetched page. Never delete the old file."""
+    incoming = html.encode("utf-8")
+    existed = output_path.is_file()
+    if existed:
+        old_hash = hashlib.sha256(output_path.read_bytes()).digest()
+        if old_hash == hashlib.sha256(incoming).digest():
+            return "unchanged"
+    temporary = output_path.with_name(output_path.name + ".tmp")
+    try:
+        temporary.write_bytes(incoming)
+        temporary.replace(output_path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+    return "updated" if existed else "created"
 
 
 # =========================================================
@@ -146,7 +221,7 @@ def download_one_job_once(p, job_id, url, output_path):
     Mỗi lần thử sẽ mở một browser mới.
 
     Trả về:
-        success -> tải và lưu HTML thành công
+        created / updated / unchanged -> đã tải và kiểm tra HTML thành công
         blocked -> bị block/rate-limit
         skip    -> URL không phải job detail
         failed  -> lỗi khác / không vào được
@@ -226,13 +301,12 @@ def download_one_job_once(p, job_id, url, output_path):
             print("✗ HTML quá ngắn/bất thường")
             return "failed"
 
-        output_path.write_text(
-            html,
-            encoding="utf-8",
-        )
-
-        print("✓ Saved:", output_path)
-        return "success"
+        result = save_html_if_changed(output_path, html)
+        if result == "unchanged":
+            print("✓ Đã tải và kiểm tra: HTML giống bản cũ, không ghi lại file.")
+        else:
+            print("✓", "Tải mới:" if result == "created" else "Cập nhật HTML:", output_path)
+        return result
 
     except Exception as e:
         print("✗ Error:", e)
@@ -283,8 +357,8 @@ def download_one_job(p, job_id, url, output_path):
             output_path,
         )
 
-        if result == "success":
-            return "success"
+        if result in SUCCESS_RESULTS:
+            return result
 
         if result == "skip":
             return "skip"
@@ -313,145 +387,87 @@ def download_one_job(p, job_id, url, output_path):
 # =========================================================
 
 def main():
-    if not INPUT_FILE.exists():
-        raise FileNotFoundError(
-            f"Không tìm thấy: {INPUT_FILE}"
-        )
-
-    df = pd.read_csv(
-        INPUT_FILE,
-        dtype={"job_id": str},
-    )
-
-    if "status" not in df.columns:
-        raise ValueError(
-            f"{INPUT_FILE} phải có cột 'status'."
-        )
-
-    # Chuẩn hóa status
-    df["status"] = (
-        df["status"]
-        .fillna("")
-        .astype(str)
-        .str.strip()
-        .str.lower()
-    )
-
-    # =====================================================
-    # CHỈ CRAWL JOB CHƯA HẾT HẠN
-    # =====================================================
-
-    if "expired_at" in df.columns:
-        expired_at_empty = (
-            df["expired_at"].isna()
-            | (df["expired_at"].astype(str).str.strip() == "")
-        )
-
-        active_df = (
-            df[
-                (df["status"] == "active")
-                & expired_at_empty
-            ]
-            .copy()
-            .reset_index(drop=True)
-        )
-    else:
-        active_df = (
-            df[df["status"] == "active"]
-            .copy()
-            .reset_index(drop=True)
-        )
-
-    total_all = len(df)
-    total = len(active_df)
-    total_not_active = total_all - total
-
-    success = 0
-    skipped_existing = 0
-    skipped_invalid = 0
-    skipped_after_retry = 0
-
-    print("=" * 80)
-    print("TOPCV DOWNLOAD DETAILS")
-    print("=" * 80)
-    print("Tổng link trong CSV :", total_all)
-    print("Job chưa hết hạn    :", total)
-    print("Job không crawl     :", total_not_active)
-    print("Input               :", INPUT_FILE)
-    print("Details             :", DETAIL_FOLDER)
-    print("Retry mỗi link      :", MAX_RETRIES_PER_JOB)
-    print("=" * 80)
-
-    with sync_playwright() as p:
-
-        for index, row in enumerate(
-            active_df.to_dict("records"),
-            start=1,
-        ):
-
-            job_id = str(
-                row.get("job_id", "")
-            ).strip()
-
-            url = str(
-                row.get("url", "")
-            ).strip()
-
-            print()
-            print("=" * 80)
-            print(f"[{index}/{total}] JOB {job_id}")
-            print(url)
-
-            # Thiếu dữ liệu -> skip
-            if not job_id or not url:
-                print("✗ Thiếu job_id/url -> skip")
-                skipped_invalid += 1
-                continue
-
-            output_path = (
-                DETAIL_FOLDER /
-                f"{job_id}.html"
-            )
-
-            # HTML đã tồn tại -> skip
-            if output_path.exists():
-                print("✓ HTML đã tồn tại -> skip")
-                skipped_existing += 1
-                continue
-
-            result = download_one_job(
-                p,
-                job_id,
-                url,
-                output_path,
-            )
-
-            if result == "success":
-                success += 1
-
-            elif result == "skip":
-                skipped_invalid += 1
-
-            elif result == "retry_exhausted":
-                skipped_after_retry += 1
-
-            # Không bao giờ break vì block.
-            # Luôn tiếp tục cho đến hết active_df.
-
-            print(f"Chờ {REQUEST_DELAY}s...")
-            time.sleep(REQUEST_DELAY)
-
-    print()
-    print("=" * 80)
-    print("KẾT THÚC TOPCV DOWNLOAD")
-    print("=" * 80)
-    print("Job chưa hết hạn      :", total)
-    print("Tải mới thành công    :", success)
-    print("HTML đã tồn tại       :", skipped_existing)
-    print("Không phải job detail :", skipped_invalid)
-    print("Skip sau 3 lần thử    :", skipped_after_retry)
-    print("Folder                :", DETAIL_FOLDER)
-    print("=" * 80)
+    from playwright.sync_api import sync_playwright
+    if not INPUT_FILE.is_file():
+        raise FileNotFoundError(f"Không tìm thấy: {INPUT_FILE}")
+    frame = pd.read_csv(INPUT_FILE, dtype=str, keep_default_na=False, encoding="utf-8-sig")
+    if not {"job_id", "url", "status"}.issubset(frame.columns):
+        raise ValueError("CSV phải có các cột job_id, url, status.")
+    frame["status"] = frame["status"].str.strip().str.lower()
+    active = frame[frame["status"] == "active"]
+    if "expired_at" in active.columns:
+        active = active[active["expired_at"].str.strip() == ""]
+    active = active.drop_duplicates("job_id", keep="last").reset_index(drop=True)
+    DETAIL_FOLDER.mkdir(parents=True, exist_ok=True)
+    cache = read_success_cache()
+    started = now_text()
+    results = []
+    run_finished = False
+    print(f"TOPCV: {len(active)} tin active. Cập nhật theo ngày Việt Nam (UTC+7).")
+    print("Tin đã tải và kiểm tra thành công hôm nay: bỏ qua. Sang ngày mới: kiểm tra lại.")
+    if FORCE_REFRESH:
+        print("FORCE_REFRESH=True: kiểm tra lại cả tin đã tải hôm nay.")
+    try:
+        with sync_playwright() as playwright:
+            for index, row in enumerate(active.to_dict("records"), 1):
+                job_id = row["job_id"].strip()
+                url = row["url"].strip()
+                print(f"\n[{index}/{len(active)}] {job_id}: {url}")
+                previous = cache.get(job_id, {})
+                if not isinstance(previous, dict):
+                    previous = {}
+                record = {"job_id": job_id, "url": url, "checked_at": None,
+                          "last_success_at": previous.get("last_success_at")}
+                if not re.fullmatch(r"[A-Za-z0-9_-]+", job_id) or not url:
+                    record.update(status="invalid_input", message="job_id hoặc URL không hợp lệ.")
+                else:
+                    path = DETAIL_FOLDER / f"{job_id}.html"
+                    record["html_path"] = str(path)
+                    if already_checked_today(path, url, previous):
+                        record.update(status="skipped_today", decision_at=now_text(),
+                                      message="Đã tải và kiểm tra thành công hôm nay; không truy cập lại.")
+                        print("✓ SKIP: đã kiểm tra thành công hôm nay.")
+                        results.append(record)
+                        continue
+                    status = download_one_job(playwright, job_id, url, path)
+                    record.update(status=status, checked_at=now_text(),
+                                  old_html_kept=status not in SUCCESS_RESULTS and path.is_file())
+                    if status in SUCCESS_RESULTS:
+                        cache[job_id] = {"url": url, "last_success_at": record["checked_at"],
+                                         "html_sha256": file_hash(path)}
+                        record["last_success_at"] = record["checked_at"]
+                    if status == "unchanged":
+                        record["message"] = "HTML không thay đổi; đã ghi nhận kiểm tra thành công hôm nay."
+                    elif status == "updated":
+                        record["message"] = "HTML đã thay đổi; lưu đè thành công."
+                    elif status == "created":
+                        record["message"] = "Đã lưu HTML cho tin mới."
+                    else:
+                        record["message"] = "Không cập nhật được tin; giữ HTML cũ nếu có. Chạy lại sẽ thử lại."
+                results.append(record)
+                time.sleep(REQUEST_DELAY)
+        run_finished = True
+    except KeyboardInterrupt:
+        print("Đã dừng thủ công; HTML và ngày kiểm tra của tin đã hoàn tất được giữ lại.")
+    finally:
+        summary = {key: sum(x["status"] == key for x in results)
+                   for key in ["created", "updated", "unchanged", "skipped_today", "skip", "retry_exhausted", "invalid_input"]}
+        summary.update(total_active=len(active), processed=len(results),
+                       errors=sum(x["status"] not in SUCCESS_RESULTS | {"skipped_today"} for x in results))
+        report = {"schema_version": 2, "source": "TopCV", "refresh_policy": "daily",
+                  "force_refresh": FORCE_REFRESH, "started_at": started, "finished_at": now_text(),
+                  "status": "incomplete" if not run_finished or len(results) < len(active)
+                            else "completed_with_errors" if summary["errors"] else "completed",
+                  "summary": summary, "jobs": results, "success_cache": cache,
+                  "notes": "Tin được bỏ qua chỉ khi đã kiểm tra thành công trong ngày Việt Nam, URL "
+                           "không đổi và file HTML còn đúng hash. Tin tải lỗi không được đánh dấu thành công. "
+                           "HTML thay đổi có thể do nội dung động; updated không khẳng định lương đã đổi."}
+        temporary = REPORT_FILE.with_name(REPORT_FILE.name + ".tmp")
+        temporary.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+        temporary.replace(REPORT_FILE)
+        print(f"DONE: {summary}")
+        print(f"Report: {REPORT_FILE}")
+    return report
 
 
 if __name__ == "__main__":

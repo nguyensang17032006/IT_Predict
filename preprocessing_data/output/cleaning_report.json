@@ -1,0 +1,635 @@
+{
+  "snapshot_ref": "unknown",
+  "as_of": "2026-10-28T03:27:38.083202+00:00",
+  "usd_to_vnd": 25805.818056,
+  "exchange_rate": {
+    "mode": "live_api",
+    "base_code": "USD",
+    "quote_code": "VND",
+    "usd_to_vnd": 25805.818056,
+    "source": "https://open.er-api.com/v6/latest/USD",
+    "provider": "https://www.exchangerate-api.com",
+    "attribution": "Rates By Exchange Rate API — https://www.exchangerate-api.com",
+    "fetched_at_utc": "2026-10-28T03:27:38.084204+00:00",
+    "provider_updated_at_utc": "2026-10-28T00:02:31+00:00",
+    "provider_next_update_utc": "Thu, 29 Oct 2026 00:07:41 +0000",
+    "conversion_policy": "One processing-time rate for the entire snapshot, not historical posting-date rates"
+  },
+  "inputs": {
+    "ITviec": {
+      "rows": 602,
+      "fallback_ids": 0,
+      "columns": [
+        "job_id",
+        "title",
+        "company",
+        "location",
+        "locations_raw",
+        "level",
+        "experience_min",
+        "experience_max",
+        "salary_raw_min",
+        "salary_raw_max",
+        "currency",
+        "salary_unit",
+        "salary_text",
+        "skills",
+        "work_type",
+        "posted_date",
+        "valid_through",
+        "description",
+        "job_location_type",
+        "source",
+        "url",
+        "status",
+        "first_seen",
+        "last_seen",
+        "expired_at",
+        "collected_at"
+      ],
+      "missing_columns": [
+        "requirements"
+      ],
+      "sha256": "194f136d5af4b1008cc47e602dfd4b8069a9ec070250e561f1a063f158888f2d",
+      "git_blob_sha": "fc901a860ab051aa8aac6e6a53382ad7f01cc44e",
+      "repository_path": "Itviet/itviet_raw.csv"
+    },
+    "TopCV": {
+      "rows": 2841,
+      "fallback_ids": 0,
+      "columns": [
+        "job_id",
+        "title",
+        "company",
+        "location",
+        "locations_raw",
+        "level",
+        "experience_min",
+        "experience_max",
+        "salary_raw_min",
+        "salary_raw_max",
+        "currency",
+        "salary_unit",
+        "salary_text",
+        "skills",
+        "work_type",
+        "posted_date",
+        "valid_through",
+        "description",
+        "requirements",
+        "job_location_type",
+        "source",
+        "url",
+        "status",
+        "first_seen",
+        "last_seen",
+        "expired_at",
+        "collected_at"
+      ],
+      "missing_columns": [],
+      "sha256": "5113cd56870084b8e5ae3f919169d10e70c2b69ad991438cd4a513bc77c67590",
+      "git_blob_sha": "a77ae5b7028c3cd0dd156255298d8881ed76df7b",
+      "repository_path": "topcv/topcv_raw.csv"
+    },
+    "VietnamWorks": {
+      "rows": 861,
+      "fallback_ids": 0,
+      "columns": [
+        "job_id",
+        "title",
+        "company",
+        "location",
+        "locations_raw",
+        "level",
+        "experience_min",
+        "experience_max",
+        "salary_raw_min",
+        "salary_raw_max",
+        "currency",
+        "salary_unit",
+        "salary_text",
+        "skills",
+        "work_type",
+        "posted_date",
+        "valid_through",
+        "description",
+        "requirements",
+        "job_location_type",
+        "source",
+        "url",
+        "status",
+        "first_seen",
+        "last_seen",
+        "expired_at",
+        "collected_at"
+      ],
+      "missing_columns": [],
+      "sha256": "5066afc3abdd6877e0245e15e9fc6fb1d286afa389b8544e9b698270c02a4337",
+      "git_blob_sha": "375f7f5e118433d66e78140816564ec07f39ef26",
+      "repository_path": "Vnwork/vnwork_raw.csv"
+    }
+  },
+  "raw_files_unchanged": {
+    "ITviec": true,
+    "TopCV": true,
+    "VietnamWorks": true
+  },
+  "input_rows": 4304,
+  "jobs_clean_rows": 4304,
+  "salary_train_rows": 811,
+  "jobs_clean_columns": 46,
+  "salary_train_columns": 53,
+  "within_source_duplicates_removed": 0,
+  "source_counts": {
+    "TopCV": 2841,
+    "VietnamWorks": 861,
+    "ITviec": 602
+  },
+  "train_source_counts": {
+    "TopCV": 609,
+    "VietnamWorks": 110,
+    "ITviec": 92
+  },
+  "salary_types": {
+    "negotiable": 2291,
+    "range": 1675,
+    "up_to": 274,
+    "from": 58,
+    "unknown": 6
+  },
+  "status_counts": {
+    "expired": 3100,
+    "active": 1204
+  },
+  "job_role_counts": {
+    "Other": 1504,
+    "QA/Tester": 239,
+    "Business Analyst": 233,
+    "Software Engineer": 219,
+    "Network/System Engineer": 187,
+    "Project Manager": 132,
+    "IT Support": 128,
+    "Fullstack Developer": 127,
+    "Data Analyst": 126,
+    "Backend Developer": 125,
+    "Product Manager": 125,
+    "Cybersecurity": 123,
+    "Machine Learning Engineer": 108,
+    "ERP/SAP": 94,
+    "DevOps Engineer": 85,
+    "Data Engineer": 85,
+    "UI/UX Designer": 84,
+    "Mobile Developer": 68,
+    "Java Developer": 64,
+    "Embedded Engineer": 51,
+    ".NET Developer": 48,
+    "Software Architect": 45,
+    "IT Consultant": 38,
+    "Frontend Developer": 36,
+    "IT Manager": 35,
+    "Cloud Engineer": 35,
+    "Game Developer": 30,
+    "Database Administrator": 29,
+    "Game Designer": 22,
+    "Bridge Engineer/IT Comtor": 16,
+    "Python Developer": 15,
+    "Data Scientist": 14,
+    "Presales Engineer": 12,
+    "Scrum Master": 9,
+    "PHP Developer": 8,
+    "JavaScript Developer": 5
+  },
+  "work_type_counts": {
+    "Full-time": 4191,
+    "Internship": 72,
+    "Part-time": 30,
+    "Temporary": 4,
+    "Unknown": 3,
+    "Freelance": 2,
+    "Contract": 1,
+    "Contract; Freelance": 1
+  },
+  "level_counts": {
+    "Experienced": 2411,
+    "Manager": 409,
+    "Lead": 382,
+    "Senior": 377,
+    "Intern": 233,
+    "Junior": 148,
+    "Middle": 133,
+    "Fresher": 57,
+    "Unknown": 54,
+    "Middle/Senior": 50,
+    "Director": 36,
+    "Principal": 14
+  },
+  "level_source_counts": {
+    "raw": 3564,
+    "title": 471,
+    "experience_rule": 215,
+    "unknown": 54
+  },
+  "level_experience_rules": [
+    {
+      "min_years": 0,
+      "max_years_exclusive": 1,
+      "level": "Fresher"
+    },
+    {
+      "min_years": 1,
+      "max_years_exclusive": 3,
+      "level": "Junior"
+    },
+    {
+      "min_years": 3,
+      "max_years_exclusive": 5,
+      "level": "Middle"
+    },
+    {
+      "min_years": 5,
+      "max_years_exclusive": null,
+      "level": "Senior"
+    }
+  ],
+  "features": [
+    "job_role_std",
+    "location_std",
+    "level_std",
+    "work_type_std",
+    "experience_years",
+    "job_location_onsite",
+    "job_location_hybrid",
+    "job_location_remote",
+    "skill_python",
+    "skill_java",
+    "skill_javascript",
+    "skill_typescript",
+    "skill_csharp",
+    "skill_cpp",
+    "skill_php",
+    "skill_sql",
+    "skill_react",
+    "skill_angular",
+    "skill_vue",
+    "skill_spring",
+    "skill_flutter",
+    "skill_kotlin",
+    "skill_swift",
+    "skill_aws",
+    "skill_azure",
+    "skill_gcp",
+    "skill_docker",
+    "skill_kubernetes",
+    "skill_linux",
+    "skill_git",
+    "skill_nodejs",
+    "skill_dotnet",
+    "skill_react_native",
+    "skill_mysql",
+    "skill_postgresql",
+    "skill_mongodb",
+    "skill_redis",
+    "skill_sqlserver",
+    "skill_sap",
+    "skill_selenium",
+    "skill_machine_learning",
+    "skill_deep_learning",
+    "skill_pytorch",
+    "skill_tensorflow",
+    "skill_powerbi",
+    "skill_html",
+    "skill_css"
+  ],
+  "categorical_features": [
+    "job_role_std",
+    "location_std",
+    "level_std",
+    "work_type_std"
+  ],
+  "job_location_features": {
+    "onsite": "Onsite",
+    "hybrid": "Hybrid",
+    "remote": "Remote"
+  },
+  "training_exclusion_counts": {
+    "target_missing_or_outside_fixed_1_300_million": 2635,
+    "salary_not_two_sided_range": 2629,
+    "role_unclassified_review_it_scope": 1504,
+    "missing_or_invalid_experience_years": 270,
+    "missing_or_unknown_level_std": 54,
+    "generic_role_without_it_evidence": 20,
+    "non_it_industry_title_review": 15,
+    "missing_or_unknown_location_std": 7,
+    "missing_or_unknown_work_type_std": 3
+  },
+  "classification_fallback": {
+    "level_estimated_from_experience": 215,
+    "work_type_unknown_before": 7,
+    "work_type_unknown_after": 3,
+    "work_type_updated": 4,
+    "job_role_other_before": 2019,
+    "job_role_other_after": 1504,
+    "job_role_updated": 515,
+    "audit_file": "classification_updates.csv"
+  },
+  "salary_outlier_rows": 48,
+  "salary_normalization_issue_rows": 2287,
+  "potential_duplicate_rows": 58,
+  "cross_source_duplicate_pairs": [
+    {
+      "job_uid_a": "ITviec_0045",
+      "job_uid_b": "VietnamWorks_2111010",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.1818
+    },
+    {
+      "job_uid_a": "ITviec_2021",
+      "job_uid_b": "VietnamWorks_2101291",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.1538
+    },
+    {
+      "job_uid_a": "ITviec_3839",
+      "job_uid_b": "TopCV_2208911",
+      "title_similarity": 0.9195,
+      "skill_similarity": 0.9333
+    },
+    {
+      "job_uid_a": "ITviec_3839",
+      "job_uid_b": "VietnamWorks_2114360",
+      "title_similarity": 0.9195,
+      "skill_similarity": 0.7368
+    },
+    {
+      "job_uid_a": "ITviec_3839",
+      "job_uid_b": "TopCV_2291824",
+      "title_similarity": 0.9195,
+      "skill_similarity": 0.9333
+    },
+    {
+      "job_uid_a": "ITviec_3811",
+      "job_uid_b": "TopCV_2296202",
+      "title_similarity": 1.0,
+      "skill_similarity": 1.0
+    },
+    {
+      "job_uid_a": "TopCV_2309289",
+      "job_uid_b": "VietnamWorks_2114388",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.6667
+    },
+    {
+      "job_uid_a": "TopCV_2208911",
+      "job_uid_b": "VietnamWorks_2114360",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.7778
+    },
+    {
+      "job_uid_a": "VietnamWorks_2114356",
+      "job_uid_b": "TopCV_2315835",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.8333
+    },
+    {
+      "job_uid_a": "VietnamWorks_2114360",
+      "job_uid_b": "TopCV_2291824",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.7778
+    },
+    {
+      "job_uid_a": "TopCV_2301001",
+      "job_uid_b": "VietnamWorks_2108024",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.15
+    },
+    {
+      "job_uid_a": "ITviec_2121",
+      "job_uid_b": "VietnamWorks_2122628",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.0
+    },
+    {
+      "job_uid_a": "TopCV_2313254",
+      "job_uid_b": "VietnamWorks_2109875",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.5
+    },
+    {
+      "job_uid_a": "TopCV_2313254",
+      "job_uid_b": "VietnamWorks_2122118",
+      "title_similarity": 0.916,
+      "skill_similarity": 0.5
+    },
+    {
+      "job_uid_a": "TopCV_2313245",
+      "job_uid_b": "VietnamWorks_2109884",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.8462
+    },
+    {
+      "job_uid_a": "TopCV_2313245",
+      "job_uid_b": "VietnamWorks_2110215",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.8462
+    },
+    {
+      "job_uid_a": "TopCV_2313245",
+      "job_uid_b": "VietnamWorks_2122159",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.8462
+    },
+    {
+      "job_uid_a": "TopCV_2313250",
+      "job_uid_b": "VietnamWorks_2109877",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.6
+    },
+    {
+      "job_uid_a": "TopCV_2313250",
+      "job_uid_b": "VietnamWorks_2122119",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.6
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110323",
+      "job_uid_b": "TopCV_2315695",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3191
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110213",
+      "job_uid_b": "TopCV_2315695",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3261
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110213",
+      "job_uid_b": "TopCV_2315696",
+      "title_similarity": 0.9091,
+      "skill_similarity": 0.2885
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110309",
+      "job_uid_b": "TopCV_2315683",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.4286
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110310",
+      "job_uid_b": "TopCV_2315686",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.4286
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110327",
+      "job_uid_b": "TopCV_2315696",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3077
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110214",
+      "job_uid_b": "TopCV_2315696",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3019
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110321",
+      "job_uid_b": "TopCV_2315690",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3243
+    },
+    {
+      "job_uid_a": "VietnamWorks_2110335",
+      "job_uid_b": "TopCV_2315702",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.6923
+    },
+    {
+      "job_uid_a": "VietnamWorks_2112736",
+      "job_uid_b": "TopCV_2315357",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3333
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122162",
+      "job_uid_b": "TopCV_2315683",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.4286
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122164",
+      "job_uid_b": "TopCV_2315690",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3243
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122163",
+      "job_uid_b": "TopCV_2315686",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.4286
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122165",
+      "job_uid_b": "TopCV_2315695",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3191
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122166",
+      "job_uid_b": "TopCV_2315696",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.3077
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122106",
+      "job_uid_b": "TopCV_2315702",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.5714
+    },
+    {
+      "job_uid_a": "VietnamWorks_2122107",
+      "job_uid_b": "TopCV_2315676",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.2778
+    },
+    {
+      "job_uid_a": "TopCV_2213717",
+      "job_uid_b": "VietnamWorks_2103004",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.6154
+    },
+    {
+      "job_uid_a": "TopCV_2290605",
+      "job_uid_b": "VietnamWorks_2115390",
+      "title_similarity": 1.0,
+      "skill_similarity": 0.125
+    },
+    {
+      "job_uid_a": "TopCV_2285116",
+      "job_uid_b": "VietnamWorks_2115302",
+      "title_similarity": 0.9143,
+      "skill_similarity": 0.0
+    }
+  ],
+  "missing_values": {
+    "job_uid": 0,
+    "job_id": 0,
+    "source": 0,
+    "title": 0,
+    "company": 14,
+    "job_role_std": 0,
+    "location_raw": 0,
+    "location_std": 0,
+    "locations_raw": 0,
+    "level_raw": 0,
+    "level_std": 0,
+    "level_source": 0,
+    "experience_min": 270,
+    "experience_max": 1536,
+    "experience_years": 270,
+    "salary_raw_min": 2534,
+    "salary_raw_max": 2370,
+    "currency": 644,
+    "salary_unit": 644,
+    "salary_text": 111,
+    "salary_type": 0,
+    "salary_min_vnd_month": 2571,
+    "salary_max_vnd_month": 2355,
+    "salary_mid_vnd_month": 2629,
+    "salary_min_million": 2571,
+    "salary_max_million": 2355,
+    "salary_mid_million": 2629,
+    "skills_raw": 1290,
+    "skills_std": 0,
+    "work_type_raw": 0,
+    "work_type_std": 0,
+    "job_location_type_raw": 0,
+    "job_location_type_std": 0,
+    "posted_date": 0,
+    "valid_through": 0,
+    "description": 0,
+    "requirements": 880,
+    "status": 0,
+    "first_seen": 0,
+    "last_seen": 0,
+    "expired_at": 1204,
+    "collected_at": 0,
+    "url": 0,
+    "potential_duplicate": 0,
+    "salary_outlier_flag": 0,
+    "salary_display": 0
+  },
+  "normalization_notes": [
+    "salary_text/raw salary columns are preserved; salary_display supplies Theo thỏa thuận.",
+    "Unknown currency/monthly unit or ambiguous small VND values have no numeric target.",
+    "Numeric employment IDs are not guessed; Unknown work types fall back to title then explicit description phrases.",
+    "Other job roles fall back to description duties with title cues; unclear or conflicting evidence stays Other.",
+    "Explicit raw/title seniority is preserved; missing level falls back to minimum years: <1 Fresher, 1..<3 Junior, 3..<5 Middle, >=5 Senior. Project estimates, not universal standards.",
+    "level_source records raw/title/experience_rule/unknown; it is audit metadata, not a model feature. Missing experience stays missing; no management level is inferred from years alone.",
+    "Missing first_seen/last_seen/collected_at are not invented from posted_date.",
+    "Status uses source status and validity deadline at as_of, not a live website check.",
+    "Outliers and cross-source potential duplicates are marked, never deleted.",
+    "Train excludes blank/Unknown required categorical features and missing/negative experience. Zero experience and all-zero skills are valid. Location types use three fixed binary multi-hot columns; raw/std text stays in jobs_clean. Other categorical features still require encoding in the model pipeline.",
+    "Train: two-sided salary range, fixed 1..300 million/month target, classified role; no dataset-quantile outlier filtering. Expired jobs retained as historical examples."
+  ]
+}

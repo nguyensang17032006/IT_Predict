@@ -1,746 +1,740 @@
+"""Step 1: collect listing pages, deduplicate after the scan, save NEW links.
+Install: pip install playwright pandas beautifulsoup4
+Then: python -m playwright install chromium
+Run this file, then 01_topcv_check_links.py in the same folder.
+Does not read or modify topcv_job_links.csv and never opens detail links.
+An interrupted scan is saved with crawl_complete=false.
+"""
+
 from pathlib import Path
-from datetime import datetime
-from urllib.parse import urljoin, urlparse
+
+from datetime import datetime, timedelta, timezone
+
+from urllib.parse import urljoin, urlparse, urlunparse, parse_qs, urlencode
+
+import json
+import hashlib
+
 import re
+
 import time
 
+import unicodedata
+
+from email.utils import parsedate_to_datetime
+
 import pandas as pd
+
 from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
 
+BASE_URL = 'https://www.topcv.vn'
 
-# =========================================================
-# CONFIG
-# =========================================================
+START_URL = BASE_URL + '/tim-viec-lam-cong-nghe-thong-tin-cr257'
 
-BASE_URL = "https://www.topcv.vn"
-START_URL = "https://www.topcv.vn/tim-viec-lam-cong-nghe-thong-tin-cr257"
-
-# File .py đang nằm trong thư mục topcv -> lưu CSV ngay cùng thư mục.
 BASE_DIR = Path(__file__).resolve().parent
-LINKS_FILE = BASE_DIR / "topcv_job_links.csv"
+
+LINKS_FILE = BASE_DIR / 'topcv_job_links.csv'
+
+REPORT_FILE = BASE_DIR / 'topcv_link_report.json'
+NEW_LINKS_FILE = BASE_DIR / 'topcv_job_links_new.csv'
+SCAN_FILE = BASE_DIR / 'topcv_job_links_new_scan.json'
+
+SITE_TZ = timezone(timedelta(hours=7))
 
 MAX_PAGES = 100
+
 PAGE_DELAY = 10
 
-BLOCK_STATUS = {419, 429}
+LOAD_SECONDS = 15
 
-BLOCK_RETRY_LIMIT = 3      # 3 lần liên tiếp
-BLOCK_RETRY_DELAY = 15     # giữa mỗi lần thử: 15 giây
+NAVIGATION_TIMEOUT_MS = 20000
 
-BROWSER_RESTART_WAIT = 60  # đóng browser rồi chờ 60 giây
-MAX_BROWSER_RESTARTS = 2   # tối đa mở lại browser 2 lần
+ACTION_TIMEOUT_MS = 5000
 
-# =========================================================
-# HELPER
-# =========================================================
+BROWSER_TIMEOUT_MS = 20000
+
+PAGE_LOAD_ATTEMPTS = 3
+
+PAGE_RETRY_DELAY = 5
+
+MAX_BROWSER_ROUNDS_PER_PAGE = None  # None: retry the same failed page until success/Ctrl+C.
+
+BROWSER_RECOVERY_DELAY = 30
+
+MAX_BROWSER_RECOVERY_DELAY = 300
+
+JOBS_PER_PAGE = 50
+
+TOTAL_SELECTOR = '.tcv-text-primary'
+
+BLOCK_STATUS = {403, 419, 429}
+
+BLOCK_RETRY_DELAY = 15
+
+MIN_SCROLL_ROUNDS = 2
+
+VERIFY_MISSING = True
+
+VERIFY_DELAY = 5
+
+VERIFY_WAIT_SECONDS = 10
+
+VERIFY_ATTEMPTS = 3
+
+VERIFY_RECOVERY_RELOADS = 1
+
+VERIFY_RELOAD_DELAY = 30
+
+MAX_VERIFY_RETRY_WAIT = 120
+
+EXPIRED_LANDING_TITLE = ('Tìm việc làm chất lượng cao từ các nhà tuyển dụng uy tín, '
+
+                         'tuyển dụng hiệu quả cùng TopCV.vn')
+
+TITLE_CONFIRM_WAIT_MS = 2000
+
+COLUMNS = ['job_id', 'url', 'status', 'first_seen', 'last_seen', 'expired_at', 'search_scope', 'status_reason', 'status_checked_at']
 
 def now_text():
-    return datetime.now().astimezone().isoformat(timespec="seconds")
 
+    return datetime.now(SITE_TZ).isoformat(timespec='seconds')
 
-def clean_url(url):
-    if not url:
-        return ""
+def normalized_text(value):
 
-    parsed = urlparse(str(url).strip())
-    return f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+    value = unicodedata.normalize('NFKD', str(value or '').casefold()).replace('đ', 'd')
 
+    return ' '.join(''.join(c for c in value if not unicodedata.combining(c)).split())
+
+def clean_url(value):
+
+    if not isinstance(value, str) or not value.strip():
+
+        return ''
+
+    parsed = urlparse(urljoin(BASE_URL, value.strip()))
+
+    if parsed.scheme not in {'http', 'https'} or parsed.hostname not in {'topcv.vn', 'www.topcv.vn'}:
+
+        return ''
+
+    return urlunparse(('https', 'www.topcv.vn', parsed.path.rstrip('/'), '', '', ''))
 
 def extract_job_id(url):
-    path = urlparse(url).path.rstrip("/")
-    match = re.search(r"/(\d+)\.html$", path)
+
+    # Supports /123.html and /brand/.../job-title-j123.html.
+
+    match = re.search(r'(?:/|-j|-)(\d+)\.html$', urlparse(url).path, re.I)
+
     return match.group(1) if match else None
 
+def search_scope():
 
-def read_csv_if_exists(path):
-    if not path.exists():
-        return pd.DataFrame()
+    p = urlparse(START_URL)
 
-    try:
-        return pd.read_csv(
-            path,
-            dtype={"job_id": str},
-        )
-    except pd.errors.EmptyDataError:
-        return pd.DataFrame()
+    query = parse_qs(p.query)
 
+    query.pop('page', None)
 
-# =========================================================
-# PARSE LISTING
-# =========================================================
+    return urlunparse(p._replace(query=urlencode(sorted(query.items()), doseq=True), fragment=''))
+
+def page_url(number):
+
+    p = urlparse(START_URL)
+
+    query = parse_qs(p.query)
+
+    query['page'] = [str(number)]
+
+    return urlunparse(p._replace(query=urlencode(query, doseq=True)))
 
 def extract_links_from_html(html):
-    soup = BeautifulSoup(html, "html.parser")
-    jobs = {}
 
-    for card in soup.select("div.job-item-search-result"):
-        job_id = card.get("data-job-id")
+    soup = BeautifulSoup(html, 'html.parser')
 
-        a = card.select_one("h3.title a[href]")
-        if not a:
+    jobs = []
+
+    for card in soup.select('div.job-item-search-result'):
+
+        anchor = card.select_one('h3.title a[href]')
+
+        url = clean_url(anchor.get('href')) if anchor else ''
+
+        job_id = extract_job_id(url) if url else None
+
+        if not url or not job_id:
+
+            raise ValueError('Không nhận diện được URL chi tiết việc làm; không lấy ID công ty làm job_id.')
+
+        # URL is the identity. data-job-id is not trusted for reconciliation.
+
+        jobs.append({'job_id': job_id, 'url': url})
+
+    return jobs
+
+def extract_total_jobs(html):
+
+    """Read an unambiguous total, avoiding numbers in cards or navigation."""
+
+    soup = BeautifulSoup(html, 'html.parser')
+
+    candidates = []
+
+    for node in soup.select(TOTAL_SELECTOR):
+
+        if node.find_parent(['nav', 'aside', 'footer', 'header']):
+
             continue
 
-        href = a.get("href")
-        if not href:
+        if node.find_parent(class_=re.compile(r'job-item|job-card|recommend|related|suggest')):
+
             continue
 
-        url = clean_url(
-            urljoin(BASE_URL, href)
-        )
+        chain = [node, *node.parents]
 
-        job_id = str(
-            job_id
-            or extract_job_id(url)
-            or ""
-        ).strip()
+        if any(getattr(x, 'attrs', {}).get('aria-hidden') == 'true' or
 
-        if not job_id:
+               'hidden' in (getattr(x, 'attrs', {}) or {}) or
+
+               'display:none' in re.sub(r'\s+', '', (getattr(x, 'attrs', {}) or {}).get('style', '')).lower()
+
+               for x in chain):
+
             continue
 
-        jobs[url] = {
-            "job_id": job_id,
-            "url": url,
-        }
+        value = node.get_text(' ', strip=True)
 
-    return list(jobs.values())
+        # Example: "2.698 việc làm Công nghệ Thông tin" -> 2698.
 
+        counter = re.fullmatch(r'(\d+(?:[.,\s]\d{3})*)\s+viec lam(?:\s+.*)?', normalized_text(value))
 
-# =========================================================
-# CRAWL LISTING
-# =========================================================
+        if counter:
 
-def collect_all_job_links():
-    """
-    Mỗi page:
-        - Nếu bình thường -> crawl rồi sang page tiếp theo.
-        - Nếu 419/429:
-            + thử lại cùng page tối đa 3 lần.
-            + đủ 3 lần liên tiếp -> đóng browser.
-            + chờ -> mở browser mới.
-            + tải lại chính page đó.
-        - Nếu vẫn block sau MAX_BROWSER_RESTARTS -> dừng.
-    """
+            total = int(re.sub(r'[^0-9]', '', counter.group(1)))
 
-    all_jobs = {}
-    crawl_complete = True
+            score = 3  # A labeled job total outranks unrelated numeric links.
 
-    with sync_playwright() as p:
+        else:
 
-        for page_no in range(1, MAX_PAGES + 1):
+            tokens = re.findall(r'\d+(?:[.,\s]\d{3})*', value)
 
-            page_url = f"{START_URL}?page={page_no}"
+            if len(tokens) != 1:
 
-            print()
-            print("=" * 80)
-            print(f"PAGE {page_no}")
-            print(page_url)
+                continue
 
-            browser = None
-            context = None
-            page = None
+            # Do not interpret prices or percentages as job totals.
 
-            browser_restart_count = 0
+            remainder = normalized_text(value.replace(tokens[0], '', 1)).strip(' ()[]:.,')
 
-            try:
+            if remainder and remainder not in {'viec lam', 'cong viec', 'jobs', 'ket qua', 'viec lam phu hop'}:
 
-                # =================================================
-                # PAGE HIỆN TẠI
-                # =================================================
+                continue
 
-                while True:
+            total = int(re.sub(r'[^0-9]', '', tokens[0]))
 
-                    # =============================================
-                    # MỞ BROWSER NẾU CHƯA CÓ
-                    # =============================================
+            score = 0
 
-                    if browser is None:
+        parent = node
 
-                        print("Mở browser...")
+        for _ in range(3):
 
-                        browser = p.chromium.launch(
-                            headless=False,
-                            args=[
-                                "--window-position=-32000,-32000",
-                                "--window-size=800,600",
-                            ],
-                        )
-
-                        context = browser.new_context(
-                            locale="vi-VN"
-                        )
-
-                        page = context.new_page()
-
-                    # =============================================
-                    # RETRY 419 / 429 TRÊN CÙNG BROWSER
-                    # =============================================
-
-                    blocked_count = 0
-                    response = None
-                    status = None
-
-                    while blocked_count < BLOCK_RETRY_LIMIT:
-
-                        try:
-
-                            response = page.goto(
-                                page_url,
-                                wait_until="domcontentloaded",
-                                timeout=60000,
-                            )
-
-                            status = (
-                                response.status
-                                if response
-                                else None
-                            )
-
-                            print("Status:", status)
-
-                        except Exception as e:
-
-                            print(
-                                "Lỗi mở listing:",
-                                e
-                            )
-
-                            crawl_complete = False
-
-                            return (
-                                list(all_jobs.values()),
-                                crawl_complete
-                            )
-
-                        # =========================================
-                        # 419 / 429
-                        # =========================================
-
-                        if status in BLOCK_STATUS:
-
-                            blocked_count += 1
-
-                            print(
-                                f"⚠ HTTP {status} "
-                                f"({blocked_count}/{BLOCK_RETRY_LIMIT})"
-                            )
-
-                            # Chưa đủ 3 lần
-                            if blocked_count < BLOCK_RETRY_LIMIT:
-
-                                print(
-                                    f"Chờ {BLOCK_RETRY_DELAY}s "
-                                    "rồi tải lại chính page này..."
-                                )
-
-                                time.sleep(
-                                    BLOCK_RETRY_DELAY
-                                )
-
-                                continue
-
-                            # Đủ 3 lần
-                            print(
-                                f"✗ Bị {status} "
-                                f"{BLOCK_RETRY_LIMIT} lần liên tiếp."
-                            )
-
-                            break
-
-                        # =========================================
-                        # STATUS KHÁC 200
-                        # =========================================
-
-                        if status != 200:
-
-                            print(
-                                f"HTTP {status} -> "
-                                "dừng crawl và KHÔNG "
-                                "cập nhật expired."
-                            )
-
-                            crawl_complete = False
-
-                            return (
-                                list(all_jobs.values()),
-                                crawl_complete
-                            )
-
-                        # =========================================
-                        # STATUS 200
-                        # =========================================
-
-                        break
-
-                    # =============================================
-                    # NẾU 419/429 ĐỦ 3 LẦN
-                    # =============================================
-
-                    if status in BLOCK_STATUS:
-
-                        browser_restart_count += 1
-
-                        print(
-                            "Đóng browser do bị block..."
-                        )
-
-                        if context:
-                            try:
-                                context.close()
-                            except Exception:
-                                pass
-
-                        if browser:
-                            try:
-                                browser.close()
-                            except Exception:
-                                pass
-
-                        context = None
-                        browser = None
-                        page = None
-
-                        # -----------------------------------------
-                        # Quá số lần restart cho phép
-                        # -----------------------------------------
-
-                        if (
-                            browser_restart_count
-                            > MAX_BROWSER_RESTARTS
-                        ):
-
-                            print(
-                                "✗ Đã mở lại browser "
-                                f"{MAX_BROWSER_RESTARTS} lần "
-                                "nhưng vẫn bị block."
-                            )
-
-                            print(
-                                "Dừng crawl và KHÔNG "
-                                "cập nhật expired."
-                            )
-
-                            crawl_complete = False
-
-                            return (
-                                list(all_jobs.values()),
-                                crawl_complete
-                            )
-
-                        # -----------------------------------------
-                        # Chờ rồi mở lại
-                        # -----------------------------------------
-
-                        print(
-                            f"Chờ {BROWSER_RESTART_WAIT}s "
-                            "trước khi mở browser mới..."
-                        )
-
-                        time.sleep(
-                            BROWSER_RESTART_WAIT
-                        )
-
-                        print(
-                            "Mở browser mới và thử lại "
-                            f"PAGE {page_no}..."
-                        )
-
-                        # Quay lên đầu while True
-                        # → mở browser mới
-                        # → vẫn dùng page_url hiện tại
-
-                        continue
-
-                    # =============================================
-                    # ĐÃ LOAD PAGE THÀNH CÔNG
-                    # =============================================
-
-                    break
-
-                # =================================================
-                # PAGE LOAD OK
-                # =================================================
-
-                page.wait_for_timeout(4000)
-
-                html = page.content()
-
-                jobs = extract_links_from_html(
-                    html
-                )
-
-                print(
-                    "Job trên page:",
-                    len(jobs)
-                )
-
-                # =================================================
-                # HẾT LISTING
-                # =================================================
-
-                if not jobs:
-
-                    print(
-                        "Không còn job -> dừng crawl."
-                    )
-
-                    break
-
-                # =================================================
-                # ADD JOB
-                # =================================================
-
-                new_count = 0
-
-                for item in jobs:
-
-                    url = item["url"]
-
-                    if url not in all_jobs:
-
-                        all_jobs[url] = item
-
-                        new_count += 1
-
-                print(
-                    "Job URL mới:",
-                    new_count
-                )
-
-                # =================================================
-                # PAGE LẶP
-                # =================================================
-
-                if new_count == 0:
-
-                    print(
-                        "Page không có URL mới "
-                        "-> dừng."
-                    )
-
-                    # An toàn: không expire nếu pagination bất thường
-                    crawl_complete = False
-
-                    break
-
-            except Exception as e:
-
-                print(
-                    "Lỗi crawler:",
-                    e
-                )
-
-                crawl_complete = False
+            if parent is None:
 
                 break
 
-            finally:
+            context = normalized_text(parent.get_text(' ', strip=True))
 
-                # =================================================
-                # PAGE XONG -> ĐÓNG BROWSER
-                # =================================================
+            if len(context) <= 400 and ('viec lam' in context or 'jobs' in context or 'ket qua' in context):
 
-                if context:
+                score = max(score, 2 if any(x in context for x in ['tim thay', 'tong', 'ket qua', 'phu hop']) else 1)
 
-                    try:
-                        context.close()
+            parent = parent.parent
 
-                    except Exception:
-                        pass
+        candidates.append((score, total))
 
-                if browser:
+    if not candidates:
 
-                    try:
-                        browser.close()
+        raise ValueError(f'Không đọc được tổng số tin từ {TOTAL_SELECTOR}.')
 
-                    except Exception:
-                        pass
+    best = max(score for score, _ in candidates)
 
-                print(
-                    f"Đã đóng browser PAGE {page_no}"
-                )
+    totals = {total for score, total in candidates if score == best}
 
-            # =====================================================
-            # DELAY TRƯỚC PAGE TIẾP
-            # =====================================================
+    if len(totals) != 1:
 
-            if page_no < MAX_PAGES:
+        raise ValueError(f'{TOTAL_SELECTOR} có nhiều số khác nhau; cần kiểm tra đúng khối tổng tin.')
 
-                print(
-                    f"Chờ {PAGE_DELAY}s..."
-                )
+    return totals.pop()
 
-                time.sleep(PAGE_DELAY)
+def expected_jobs_on_page(total, number):
 
-    return (
-        list(all_jobs.values()),
-        crawl_complete
-    )
+    return min(JOBS_PER_PAGE, max(0, total - (number - 1) * JOBS_PER_PAGE))
 
-# =========================================================
-# SYNC LIFECYCLE
-# =========================================================
+def blocked_page(html):
 
-def sync_job_links():
-    old_df = read_csv_if_exists(LINKS_FILE)
+    soup = BeautifulSoup(html, 'html.parser')
 
-    current_jobs, crawl_complete = (
-        collect_all_job_links()
-    )
+    title = normalized_text(soup.title.get_text(' ', strip=True) if soup.title else '')
 
-    current_map = {
-        clean_url(item["url"]): item
-        for item in current_jobs
-        if item.get("url")
-    }
+    return any(term in title for term in ['access denied', 'attention required', 'just a moment', 'blocked', 'too many requests'])
 
-    current_set = set(current_map)
-    now = now_text()
+def scroll_listing(page, rounds):
 
-    # -----------------------------------------
-    # DỮ LIỆU CŨ
-    # -----------------------------------------
+    page.evaluate("""() => {
 
-    if old_df.empty:
-        old_map = {}
-        old_active = set()
+        window.scrollBy(0, Math.max(500, window.innerHeight * 0.8));
 
-    else:
-        if "url" not in old_df.columns:
-            raise ValueError(
-                f"{LINKS_FILE} phải có cột 'url'."
-            )
+        const card = document.querySelector('div.job-item-search-result');
 
-        old_df = old_df.copy()
+        for (let el = card && card.parentElement; el; el = el.parentElement) {
 
-        old_df["url"] = (
-            old_df["url"]
-            .astype(str)
-            .map(clean_url)
-        )
+            const style = getComputedStyle(el);
 
-        old_df = old_df.drop_duplicates(
-            subset=["url"],
-            keep="last",
-        )
+            if (/auto|scroll/.test(style.overflowY) && el.scrollHeight > el.clientHeight + 100) {
 
-        old_map = {
-            row["url"]: row.to_dict()
-            for _, row in old_df.iterrows()
+                el.scrollTop += Math.max(400, el.clientHeight * 0.8);
+
+            }
+
         }
 
-        if "status" in old_df.columns:
-            old_active = set(
-                old_df.loc[
-                    old_df["status"] == "active",
-                    "url",
-                ]
-            )
+    }""")
+
+    if rounds and rounds % 7 == 0:
+
+        page.evaluate('window.scrollTo(0, 0)')
+
+def rendered_page_number(html):
+
+    soup = BeautifulSoup(html, 'html.parser')
+
+    active = soup.select_one('.pagination [aria-current="page"], .pagination .active')
+
+    value = active.get_text(' ', strip=True) if active else ''
+
+    return int(value) if value.isdigit() else None
+
+def load_listing(page, number, response_meta=None):
+
+    """Wait for card count/rendering, not for 50 globally new IDs."""
+
+    response = page.goto(page_url(number), wait_until='domcontentloaded', timeout=NAVIGATION_TIMEOUT_MS)
+
+    status = response.status if response else None
+
+    if response_meta is not None:
+
+        response_meta.update(http_status=status, retry_after_seconds=retry_after_seconds(
+
+            response.headers.get('retry-after') if response else None, now_text()))
+
+    if status != 200:
+
+        return [], '', status
+
+    start = time.monotonic()
+
+    previous_log = None
+
+    last_heartbeat = -5
+
+    rounds = 0
+
+    while True:
+
+        html = page.content()
+
+        if blocked_page(html):
+
+            return [], html, 403
+
+        jobs = extract_links_from_html(html)
+
+        try:
+
+            total = extract_total_jobs(html)
+
+            expected = expected_jobs_on_page(total, number)
+
+        except ValueError:
+
+            expected = None
+
+        rendered = rendered_page_number(html)
+
+        state = (len(jobs), expected, rendered)
+
+        elapsed = time.monotonic() - start
+
+        if state != previous_log or elapsed - last_heartbeat >= 5:
+
+            print(f'    page={number}, links={len(jobs)}/{expected if expected is not None else "?"}, '
+
+                  f'trang hiển thị={rendered}, '
+
+                  f'đã chờ={elapsed:.0f}/{LOAD_SECONDS}s', flush=True)
+
+            previous_log = state
+
+            last_heartbeat = elapsed
+
+        if rounds >= MIN_SCROLL_ROUNDS and listing_ready(jobs, html, number):
+
+            return jobs, html, status
+
+        if elapsed >= LOAD_SECONDS:
+
+            return jobs, html, status
+
+        rounds += 1
+
+        scroll_listing(page, rounds)
+
+        page.wait_for_timeout(1000)
+
+def listing_ready(jobs, html, number):
+
+    try:
+
+        total = extract_total_jobs(html)
+
+    except ValueError:
+
+        return False
+
+    expected = expected_jobs_on_page(total, number)
+
+    rendered = rendered_page_number(html)
+
+    return expected > 0 and expected <= len(jobs) <= JOBS_PER_PAGE and rendered in {None, number}
+
+def wait_with_message(seconds, reason):
+
+    remaining = seconds
+
+    while remaining > 0:
+
+        print(f'    {reason}: còn {remaining:g}s...', flush=True)
+
+        interval = min(5, remaining)
+
+        time.sleep(interval)
+
+        remaining -= interval
+
+def close_browser_resources(context, browser):
+
+    # One cleanup failure must not prevent closing the remaining resource.
+
+    for name, resource in [('context', context), ('browser', browser)]:
+
+        if resource is not None:
+
+            try:
+
+                resource.close()
+
+            except Exception as exc:
+
+                print(f'Không đóng được {name}: {type(exc).__name__}: {exc}', flush=True)
+
+def deduplicate_collected_links(jobs):
+    unique = {}
+    for item in jobs:
+        url = clean_url(item.get('url'))
+        job_id = extract_job_id(url) if url else None
+        if not job_id:
+            raise ValueError('URL thu thập không hợp lệ; không đối soát.')
+        unique[url] = {'url': url, 'job_id': job_id}
+    return list(unique.values())
+
+def collect_all_job_links(diagnostics=None):
+
+    from playwright.sync_api import sync_playwright
+
+    all_jobs = []
+
+    complete = False
+
+    info = {'initial_total': None, 'latest_total': None, 'expected_pages': None,
+
+            'pages_completed': 0, 'unique_jobs': 0, 'overlap_count': 0,
+
+            'total_changes': [], 'stop_reason': None, 'snapshot_consistent': False,
+
+            'page_attempts': [], 'browser_recoveries': []}
+
+    try:
+
+        with sync_playwright() as playwright:
+
+            for number in range(1, MAX_PAGES + 1):
+
+                print(f'\nPAGE {number}: {page_url(number)}', flush=True)
+
+                jobs, html, status = [], '', None
+
+                page_ready = False
+
+                browser_round = 0
+
+                while not page_ready:
+
+                    browser_round += 1
+
+                    browser = context = None
+
+                    error_message = ''
+
+                    requested_pause = 0
+
+                    try:
+
+                        print(f'  Mở Chrome cho trang {number}, vòng {browser_round}...', flush=True)
+
+                        browser = playwright.chromium.launch(headless=False, timeout=BROWSER_TIMEOUT_MS,
+
+                                                             args=['--window-size=1280,800'])
+
+                        context = browser.new_context(locale='vi-VN')
+
+                        context.set_default_timeout(ACTION_TIMEOUT_MS)
+
+                        context.set_default_navigation_timeout(NAVIGATION_TIMEOUT_MS)
+
+                        page = context.new_page()
+
+                        for attempt in range(1, PAGE_LOAD_ATTEMPTS + 1):
+
+                            print(f'  Trang {number}, vòng Chrome {browser_round}, lượt {attempt}/{PAGE_LOAD_ATTEMPTS}: '
+
+                                  f'mở tối đa {NAVIGATION_TIMEOUT_MS // 1000}s, chờ/cuộn tối đa {LOAD_SECONDS}s.', flush=True)
+
+                            attempt_info = {'page': number, 'browser_round': browser_round,
+
+                                            'attempt': attempt, 'started_at': now_text()}
+
+                            status = None
+
+                            meta = {}
+
+                            try:
+
+                                jobs, html, status = load_listing(page, number, meta)
+
+                                requested_pause = max(0, meta.get('retry_after_seconds', 0))
+
+                                attempt_info.update(http_status=status, links=len(jobs), retry_after_seconds=requested_pause)
+
+                                if status == 200:
+
+                                    all_jobs.extend(jobs)
+
+                                page_ready = status == 200 and listing_ready(jobs, html, number)
+
+                                if not page_ready:
+
+                                    error_message = (f'HTTP {status}' if status != 200 else
+
+                                                     f'trang thiếu nội dung hoặc sai số trang ({len(jobs)} link)')
+
+                            except Exception as exc:
+
+                                page_ready = False
+
+                                error_message = f'{type(exc).__name__}: {exc}'
+
+                                attempt_info['error'] = error_message
+
+                            attempt_info.update(finished_at=now_text(), ready=page_ready)
+
+                            info['page_attempts'].append(attempt_info)
+
+                            if page_ready:
+
+                                break
+
+                            print(f'  Lỗi lượt {attempt}/{PAGE_LOAD_ATTEMPTS}: {error_message}', flush=True)
+
+                            if attempt < PAGE_LOAD_ATTEMPTS:
+
+                                delay = BLOCK_RETRY_DELAY if status in BLOCK_STATUS else PAGE_RETRY_DELAY
+
+                                wait_with_message(max(delay, requested_pause), 'Chờ trước khi thử lại chính trang này')
+
+                    except Exception as exc:
+
+                        error_message = f'{type(exc).__name__}: {exc}'
+
+                        print(f'  Lỗi Chrome: {error_message}', flush=True)
+
+                    finally:
+
+                        print(f'  Đóng Chrome của trang {number}, vòng {browser_round}...', flush=True)
+
+                        close_browser_resources(context, browser)
+
+                    if page_ready:
+
+                        break
+
+                    if MAX_BROWSER_ROUNDS_PER_PAGE is not None and browser_round >= MAX_BROWSER_ROUNDS_PER_PAGE:
+
+                        info['stop_reason'] = (f'Trang {number} vẫn lỗi sau {browser_round} vòng Chrome '
+
+                                               f'(tối đa {PAGE_LOAD_ATTEMPTS} lượt/vòng): {error_message}. '
+
+                                               'Đã chạm giới hạn cấu hình; giữ các link đã lấy.')
+
+                        break
+
+                    # Increasing pauses reduce pressure; a longer Retry-After wins.
+
+                    cooldown = min(MAX_BROWSER_RECOVERY_DELAY, BROWSER_RECOVERY_DELAY * 2 ** min(browser_round - 1, 12))
+
+                    cooldown = max(cooldown, requested_pause)
+
+                    info['browser_recoveries'].append({'page': number, 'completed_round': browser_round,
+
+                                                       'error': error_message, 'wait_seconds': cooldown})
+
+                    print(f'  Trang {number} vẫn lỗi. Giữ {len(all_jobs)} link đã lấy; '
+
+                          'chờ rồi mở Chrome mới để thử LẠI TRANG NÀY. Ctrl+C để dừng và lưu.', flush=True)
+
+                    wait_with_message(cooldown, f'Chờ mở lại Chrome cho trang {number}')
+
+                if not page_ready:
+
+                    break
+
+                total = extract_total_jobs(html)
+
+                if info['initial_total'] is None:
+
+                    info['initial_total'] = total
+
+                if info['latest_total'] is not None and info['latest_total'] != total:
+
+                    info['total_changes'].append({'page': number, 'before': info['latest_total'], 'after': total})
+
+                    print(f"Tổng tin thay đổi {info['latest_total']} -> {total}; tiếp tục thu thập.", flush=True)
+
+                info['latest_total'] = total
+
+                info['expected_pages'] = (total + JOBS_PER_PAGE - 1) // JOBS_PER_PAGE
+
+                rendered = rendered_page_number(html)
+
+                print(f'Trang {number}/{info["expected_pages"]}: {len(jobs)} link; '
+                      f'tổng thu thập={len(all_jobs)} (chưa loại trùng); tổng hiển thị={total}.', flush=True)
+
+                info['pages_completed'] += 1
+
+                if number >= info['expected_pages']:
+
+                    complete = True
+
+                    info['stop_reason'] = 'Đã quét đến trang cuối theo tổng tin hiện tại.'
+
+                    break
+
+                if number < MAX_PAGES:
+
+                    wait_with_message(PAGE_DELAY, 'Chờ sang trang tiếp theo')
+
+            else:
+
+                info['stop_reason'] = 'Chạm MAX_PAGES; quét trang chưa hoàn tất.'
+
+    except KeyboardInterrupt:
+
+        info['stop_reason'] = 'Dừng thủ công; lưu các link đã thấy.'
+
+    except Exception as exc:
+
+        info['stop_reason'] = f'{type(exc).__name__}: {exc}'
+
+    finally:
+
+        raw_count = len(all_jobs)
+        all_jobs = deduplicate_collected_links(all_jobs)
+        info['collected_rows'] = raw_count
+        info['duplicates_removed'] = raw_count - len(all_jobs)
+        info['overlap_count'] = info['duplicates_removed']
+        info['unique_jobs'] = len(all_jobs)
+        print(f'Gom xong: {raw_count} link -> {len(all_jobs)} duy nhất; '
+              f'loại {info["duplicates_removed"]} bản trùng.', flush=True)
+
+        info['crawl_complete'] = complete
+
+        info['snapshot_consistent'] = bool(complete and not info['total_changes'] and
+
+                                           info['overlap_count'] == 0 and len(all_jobs) == info['latest_total'])
+
+        if diagnostics is not None:
+
+            diagnostics.update(info)
+
+        print(f"STOP: {info['stop_reason']}", flush=True)
+
+        if complete:
+
+            print('Tin vắng mặt sẽ được kiểm tra tại link chi tiết trước khi đánh expired.', flush=True)
+
         else:
-            old_active = set(
-                old_df["url"]
-            )
 
-    # -----------------------------------------
-    # SO SÁNH LIFECYCLE
-    # -----------------------------------------
+            print('INCOMPLETE: lưu các link đã thấy, giữ trạng thái tin vắng mặt.', flush=True)
 
-    old_all = set(old_map)
+    return all_jobs, complete
 
-    new_urls = (
-        current_set
-        - old_all
-    )
+def retry_after_seconds(value, stamp):
 
-    expired_urls = (
-        old_active
-        - current_set
-    ) if crawl_complete else set()
+    if not value:
 
-    reactivated_urls = {
-        url
-        for url in current_set & old_all
-        if str(
-            old_map[url].get(
-                "status",
-                "active",
-            )
-        ) == "expired"
-    }
+        return 0
 
-    rows = []
+    value = str(value).strip()
 
-    for url in sorted(
-        old_all | current_set
-    ):
-        old = old_map.get(
-            url,
-            {},
-        )
+    if value.isdigit():
 
-        current = current_map.get(
-            url,
-            {},
-        )
+        return int(value)
 
-        first_seen = old.get(
-            "first_seen"
-        )
+    try:
 
-        if (
-            first_seen is None
-            or pd.isna(first_seen)
-            or str(first_seen).strip() == ""
-        ):
-            first_seen = now
+        deadline = parsedate_to_datetime(value)
 
-        last_seen = old.get(
-            "last_seen"
-        )
+        if deadline.tzinfo is None:
 
-        if (
-            last_seen is None
-            or pd.isna(last_seen)
-            or str(last_seen).strip() == ""
-        ):
-            last_seen = first_seen
+            deadline = deadline.replace(tzinfo=timezone.utc)
 
-        expired_at = old.get(
-            "expired_at",
-            "",
-        )
+        return max(0, (deadline - datetime.fromisoformat(stamp)).total_seconds())
 
-        if (
-            expired_at is None
-            or pd.isna(expired_at)
-        ):
-            expired_at = ""
+    except (TypeError, ValueError, OverflowError):
 
-        old_status = str(
-            old.get(
-                "status",
-                "active",
-            )
-        )
+        return 0
 
-        # -------------------------------------
-        # JOB ĐANG CÒN TRÊN LISTING
-        # -------------------------------------
+def save_new_links():
+    """Save this scan only; history is updated by 01_topcv_check_links.py."""
+    scan = {}
+    jobs, complete = collect_all_job_links(scan)
+    stamp = now_text()
+    scope = search_scope()
+    frame = pd.DataFrame(jobs, columns=['job_id', 'url'])
+    frame['collected_at'] = stamp
+    frame['search_scope'] = scope
+    temporary = NEW_LINKS_FILE.with_suffix('.csv.tmp')
+    frame.to_csv(temporary, index=False, encoding='utf-8-sig')
+    digest = hashlib.sha256(temporary.read_bytes()).hexdigest()
+    temporary.replace(NEW_LINKS_FILE)
+    metadata = {'source': 'TopCV', 'collected_at': stamp, 'search_scope': scope,
+                'crawl_complete': complete, 'rows': len(frame),
+                'csv_sha256': digest, 'scan': scan}
+    temporary = SCAN_FILE.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding='utf-8')
+    temporary.replace(SCAN_FILE)
+    print(f'Saved: {NEW_LINKS_FILE} ({len(frame)} link duy nhất)')
+    print('Chạy python 01_topcv_check_links.py để đối chiếu và cập nhật lịch sử.')
+    return frame, complete
 
-        if url in current_set:
-            status = "active"
-            last_seen = now
-            expired_at = ""
-
-        # -------------------------------------
-        # JOB BIẾN MẤT
-        # chỉ expire nếu listing crawl hoàn chỉnh
-        # -------------------------------------
-
-        elif crawl_complete:
-            status = "expired"
-
-            if (
-                old_status != "expired"
-                or not str(expired_at).strip()
-            ):
-                expired_at = now
-
-        # -------------------------------------
-        # LISTING CRAWL LỖI
-        # giữ nguyên status cũ
-        # -------------------------------------
-
-        else:
-            status = old_status
-
-        rows.append(
-            {
-                "job_id": str(
-                    old.get("job_id")
-                    or current.get("job_id")
-                    or extract_job_id(url)
-                    or ""
-                ),
-                "url": url,
-                "status": status,
-                "first_seen": first_seen,
-                "last_seen": last_seen,
-                "expired_at": expired_at,
-            }
-        )
-
-    links_df = pd.DataFrame(rows)
-
-    if not links_df.empty:
-        links_df["job_id"] = (
-            links_df["job_id"]
-            .astype("string")
-        )
-
-    links_df.to_csv(
-        LINKS_FILE,
-        index=False,
-        encoding="utf-8-sig",
-    )
-
-    # -----------------------------------------
-    # REPORT
-    # -----------------------------------------
-
-    print()
-    print("=" * 80)
-    print("ĐỒNG BỘ LINK TOPCV")
-    print("=" * 80)
-
-    print(
-        "Job active hiện tại :",
-        len(current_set),
-    )
-
-    print(
-        "Job mới             :",
-        len(new_urls),
-    )
-
-    print(
-        "Job vừa hết hạn     :",
-        len(expired_urls),
-    )
-
-    print(
-        "Job active trở lại  :",
-        len(reactivated_urls),
-    )
-
-    print(
-        "Tổng URL lịch sử    :",
-        len(links_df),
-    )
-
-    print(
-        "File                :",
-        LINKS_FILE,
-    )
-
-    if not crawl_complete:
-        print(
-            "CẢNH BÁO: crawl listing chưa hoàn chỉnh "
-            "-> không cập nhật expired."
-        )
-
-    print("=" * 80)
-
-    return links_df, crawl_complete
-
-
-# =========================================================
-# MAIN
-# =========================================================
-
-def main():
-    sync_job_links()
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    save_new_links()

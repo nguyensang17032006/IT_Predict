@@ -1,4 +1,4 @@
-"""Merge four read-only raw sources into jobs_clean.csv and salary_train.csv.
+"""Merge three read-only raw sources into jobs_clean.csv and salary_train.csv.
 
 Python >=3.10. Run from anywhere with --root pointing to the IT_Predict repo.
 Missing crawler timestamps remain missing. All normalization rules are explicit.
@@ -12,6 +12,8 @@ import json
 import math
 import re
 import unicodedata
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -20,7 +22,6 @@ import numpy as np
 import pandas as pd
 
 SOURCE_FILES = {
-    "CareerViet": "careerviet/careerviet_raw.csv",
     "ITviec": "Itviet/itviet_raw.csv",
     "TopCV": "topcv/topcv_raw.csv",
     "VietnamWorks": "Vnwork/vnwork_raw.csv",
@@ -35,7 +36,7 @@ RAW_COLUMNS = [
 ]
 JOBS_COLUMNS = [
     "job_uid", "job_id", "source", "title", "company", "job_role_std",
-    "location_raw", "location_std", "locations_raw", "level_raw", "level_std",
+    "location_raw", "location_std", "locations_raw", "level_raw", "level_std", "level_source",
     "experience_min", "experience_max", "experience_years", "salary_raw_min",
     "salary_raw_max", "currency", "salary_unit", "salary_text", "salary_type",
     "salary_min_vnd_month", "salary_max_vnd_month", "salary_mid_vnd_month",
@@ -48,20 +49,30 @@ JOBS_COLUMNS = [
 ]
 SKILL_FEATURES = {
     "python": {"Python"}, "java": {"Java"},
-    "javascript": {"JavaScript", "Node.js"}, "typescript": {"TypeScript"},
+    "javascript": {"JavaScript"}, "typescript": {"TypeScript"},
     "csharp": {"C#"}, "cpp": {"C++"}, "php": {"PHP"}, "sql": {"SQL"},
     "react": {"React"}, "angular": {"Angular"}, "vue": {"Vue.js"},
     "spring": {"Spring", "Spring Boot"}, "flutter": {"Flutter"},
     "kotlin": {"Kotlin"}, "swift": {"Swift"}, "aws": {"AWS"},
     "azure": {"Azure"}, "gcp": {"GCP"}, "docker": {"Docker"},
     "kubernetes": {"Kubernetes"}, "linux": {"Linux"}, "git": {"Git"},
+    "nodejs": {"Node.js"}, "dotnet": {".NET"}, "react_native": {"React Native"},
+    "mysql": {"MySQL"}, "postgresql": {"PostgreSQL"}, "mongodb": {"MongoDB"},
+    "redis": {"Redis"}, "sqlserver": {"SQL Server"}, "sap": {"SAP"},
+    "selenium": {"Selenium"}, "machine_learning": {"Machine Learning"},
+    "deep_learning": {"Deep Learning"}, "pytorch": {"PyTorch"}, "tensorflow": {"TensorFlow"},
+    "powerbi": {"Power BI"}, "html": {"HTML"}, "css": {"CSS"},
 }
 CATEGORICAL_FEATURES = ["job_role_std", "location_std", "level_std",
-                        "work_type_std", "job_location_type_std"]
+                        "work_type_std"]
+JOB_LOCATION_FEATURES = {"onsite": "Onsite", "hybrid": "Hybrid", "remote": "Remote"}
+REQUIRED_TRAIN_CATEGORIES = CATEGORICAL_FEATURES + ["job_location_type_std"]
 FEATURES = CATEGORICAL_FEATURES + ["experience_years"] + [
+    f"job_location_{name}" for name in JOB_LOCATION_FEATURES
+] + [
     f"skill_{x}" for x in SKILL_FEATURES
 ]
-TRAIN_COLUMNS = ["job_uid", "source", "title", "company"] + FEATURES + ["salary_mid_million"]
+TRAIN_COLUMNS = ["job_uid", "source", "title", "company", "company_group"] + FEATURES + ["salary_mid_million"]
 NUMERIC_RAW = ["experience_min", "experience_max", "salary_raw_min", "salary_raw_max"]
 HISTORY_COLUMNS = ["first_seen", "last_seen", "expired_at", "collected_at"]
 ALIASES = {
@@ -76,6 +87,61 @@ ALIASES = {
     "requirements": ["requirements", "job_requirements", "jobRequirement"],
     "description": ["description", "job_description", "jobDescription"],
 }
+
+FX_URL = "https://open.er-api.com/v6/latest/USD"
+FX_ATTRIBUTION = "Rates By Exchange Rate API — https://www.exchangerate-api.com"
+
+
+def validate_fx_snapshot(data):
+    if not isinstance(data, dict) or data.get("base_code") != "USD" or data.get("quote_code") != "VND":
+        raise ValueError("FX snapshot must contain base_code=USD and quote_code=VND")
+    rate = data.get("usd_to_vnd")
+    if isinstance(rate, bool):
+        raise ValueError("Invalid USD/VND rate")
+    try:
+        rate = float(rate)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Missing or invalid USD/VND rate") from exc
+    if not math.isfinite(rate) or rate <= 0:
+        raise ValueError("USD/VND rate must be finite and positive")
+    return {**data, "usd_to_vnd": rate}
+
+
+def resolve_fx(usd_to_vnd=None, fx_file=None):
+    """One fetch per run; manual/snapshot modes never use the network."""
+    fetched_at = pd.Timestamp.now(tz="UTC").isoformat()
+    if usd_to_vnd is not None:
+        return validate_fx_snapshot({"mode": "manual", "base_code": "USD", "quote_code": "VND",
+            "usd_to_vnd": usd_to_vnd, "source": "CLI/function argument",
+            "fetched_at_utc": fetched_at, "provider_updated_at_utc": None})
+    if fx_file is not None:
+        data = validate_fx_snapshot(json.loads(Path(fx_file).read_text(encoding="utf-8-sig")))
+        return {**data, "mode": "saved_snapshot", "snapshot_file": str(Path(fx_file).resolve())}
+    try:
+        request = Request(FX_URL, headers={"User-Agent": "CareerPredict/1.0", "Accept": "application/json"})
+        with urlopen(request, timeout=10) as response:
+            payload = json.load(response)
+        if payload.get("result") != "success" or payload.get("base_code") != "USD":
+            raise ValueError("Exchange-rate provider returned an unsuccessful response")
+        updated = payload.get("time_last_update_unix")
+        if isinstance(updated, bool) or not isinstance(updated, (int, float)) or not math.isfinite(updated):
+            raise ValueError("Provider response is missing a valid update timestamp")
+        update_time = pd.Timestamp(updated, unit="s", tz="UTC")
+        age = (pd.Timestamp.now(tz="UTC") - update_time).total_seconds()
+        if age < -3600 or age > 3 * 86400:
+            raise ValueError("Provider rate timestamp is in the future or more than 3 days old")
+        return validate_fx_snapshot({"mode": "live_api", "base_code": "USD", "quote_code": "VND",
+            "usd_to_vnd": payload.get("rates", {}).get("VND"), "source": FX_URL,
+            "provider": payload.get("provider", "https://www.exchangerate-api.com"),
+            "attribution": FX_ATTRIBUTION, "fetched_at_utc": fetched_at,
+            "provider_updated_at_utc": update_time.isoformat(),
+            "provider_next_update_utc": payload.get("time_next_update_utc"),
+            "conversion_policy": "One processing-time rate for the entire snapshot, not historical posting-date rates"})
+    except (URLError, HTTPError, TimeoutError, ValueError, KeyError, TypeError, OSError) as exc:
+        raise RuntimeError("Không lấy được tỷ giá USD/VND hợp lệ. Không tự dùng 25.000. "
+            "Thử lại, hoặc dùng --usd-to-vnd <ty_gia> / --fx-file <fx_snapshot.json>. "
+            f"Chi tiết: {exc}") from exc
+
 
 def text(value):
     if value is None or value is pd.NA:
@@ -154,8 +220,11 @@ def extract_id(source, url):
 
 def adapt_source(path, source):
     """Map aliases + fill absent fields + type + source + UID BEFORE concat."""
-    raw = pd.read_csv(path, dtype={"job_id": str, "id": str, "jobId": str}, encoding="utf-8-sig",
+    raw = pd.read_csv(path, dtype=str, encoding="utf-8-sig",
                       keep_default_na=False, low_memory=False)
+    raw.columns = raw.columns.str.strip().str.lstrip("\ufeff")
+    if raw.columns.duplicated().any():
+        raise ValueError(f"{path}: duplicate headers after stripping whitespace")
     normalized = pd.DataFrame(index=raw.index)
     for column in RAW_COLUMNS:
         candidates = [c for c in ALIASES.get(column, [column]) if c in raw.columns]
@@ -254,6 +323,12 @@ ROLE_RULES = [
 
 def normalize_role(title):
     value = fold(title)
+    if re.search(r"embedded|firmware|lap trinh nhung|he thong nhung", value):
+        return "Embedded Engineer"
+    if re.search(r"ui/?ux|ux/?ui", value):
+        return "UI/UX Designer"
+    if re.search(r"(?:infrastructure|ha tang).{0,30}(?:engineer|ky su)|(?:ky su|engineer).{0,30}(?:cloud|dam may)", value):
+        return "Cloud Engineer" if re.search(r"cloud|aws|azure|dam may", value) else "Network/System Engineer"
     for role, pattern in ROLE_RULES:
         if re.search(pattern, value):
             return role
@@ -447,27 +522,63 @@ def infer_job_role(row):
     return best[2], {"evidence_field": "description", "evidence": match_evidence(description, best[3]),
                      "rule": "description_duties_and_title" if best[1] else "description_duties"}
 
+# Project-specific estimates, not a universal company seniority standard.
+LEVEL_EXPERIENCE_RULES = [
+    {"min_years": 0, "max_years_exclusive": 1, "level": "Fresher"},
+    {"min_years": 1, "max_years_exclusive": 3, "level": "Junior"},
+    {"min_years": 3, "max_years_exclusive": 5, "level": "Middle"},
+    {"min_years": 5, "max_years_exclusive": None, "level": "Senior"},
+]
+
+
+def explicit_level(value):
+    value = fold(value)
+    for label, pattern in [
+        ("Intern", r"\bintern(?:ship)?\b|thuc tap"),
+        ("Fresher", r"\bfresher\b|\bgraduate\b|moi tot nghiep"),
+        ("Director", r"\bdirector\b|\bcto\b|giam doc"),
+        ("Principal", r"\bprincipal\b"),
+        ("Manager", r"\bmanager\b|head of|truong/?pho phong|truong phong|quan ly|giam sat"),
+        ("Lead", r"\blead\b|\bleader\b|truong nhom"),
+    ]:
+        if re.search(pattern, value):
+            return label
+    if re.search(r"\b(mid|middle)\b", value) and re.search(r"\b(senior|sr)\b", value):
+        return "Middle/Senior"
+    for label, pattern in [("Senior", r"\bsenior\b|\bsr\b"),
+                           ("Middle", r"\bmiddle\b|\bmid\b"),
+                           ("Junior", r"\bjunior\b|\bjr\b")]:
+        if re.search(pattern, value):
+            return label
+    return None
+
+
+def infer_level(row):
+    """Use explicit raw/title levels first; estimate missing level from minimum years."""
+    raw = text(row.get("level_raw")) or text(row.get("level"))
+    for source, value in [("raw", raw), ("title", row.get("title"))]:
+        level = explicit_level(value)
+        if level:
+            return level, source
+    if fold(raw) in {"experienced", "nhan vien", "non-manager", "non manager"}:
+        # Preserve a supplied generic employee category; it is not missing.
+        return "Experienced", "raw"
+    years = number(row.get("experience_years"))
+    if years is None:
+        years, _ = normalize_experience(row)
+    if years is None or not 0 <= years <= 40:
+        return "Unknown", "unknown"
+    for rule in LEVEL_EXPERIENCE_RULES:
+        upper = rule["max_years_exclusive"]
+        if years >= rule["min_years"] and (upper is None or years < upper):
+            return rule["level"], "experience_rule"
+    return "Unknown", "unknown"
+
+
 def normalize_level(row):
-    title = fold(row.get("title")); raw = fold(row.get("level_raw"))
-    for value in [title, raw]:
-        for label, pattern in [
-            ("Intern", r"\bintern(?:ship)?\b|thuc tap"),
-            ("Fresher", r"\bfresher\b|graduate|moi tot nghiep"),
-            ("Director", r"\bdirector\b|\bcto\b|giam doc"),
-            ("Principal", r"\bprincipal\b"),
-            ("Manager", r"\bmanager\b|head of|truong/?pho phong|truong phong|quan ly|giam sat"),
-            ("Lead", r"\blead\b|\bleader\b|truong nhom"),
-        ]:
-            if re.search(pattern, value):
-                return label
-        if re.search(r"\b(mid|middle)\b", value) and re.search(r"\b(senior|sr)\b", value):
-            return "Middle/Senior"
-        for label, pattern in [("Senior", r"\bsenior\b|\bsr\b"),
-                               ("Middle", r"\bmiddle\b|\bmid\b"),
-                               ("Junior", r"\bjunior\b|\bjr\b")]:
-            if re.search(pattern, value):
-                return label
-    return "Experienced" if raw in {"experienced", "nhan vien", "non-manager", "non manager"} else "Unknown"
+    # Backward-compatible scalar API for callers using this helper directly.
+    return infer_level(row)[0]
+
 
 def normalize_experience(row):
     lo, hi = number(row.get("experience_min")), number(row.get("experience_max"))
@@ -678,7 +789,10 @@ def parse_salary_text(value):
     scale = 1_000_000 if million else 1_000 if thousand else 1
     # In a salary with units 'million', 10.5 / 10,5 means a decimal, not grouping.
     def value_of(token):
-        n = float(token.replace(",", ".")) if scale == 1_000_000 and re.fullmatch(r"\d+[.,]\d{1,2}", token) else number(token)
+        if re.fullmatch(r"\d{1,3}(?:[.,]\d{3})+", token):
+            n = float(re.sub(r"[.,]", "", token))
+        else:
+            n = float(token.replace(",", ".")) if scale == 1_000_000 and re.fullmatch(r"\d+[.,]\d{1,2}", token) else number(token)
         return n * scale if n is not None else None
     amounts = [value_of(token) for token in numbers]
     if len(amounts) >= 2 and re.search(r"\d[\d.,]*\s*(?:tr(?:ieu)?|usd|vnd|\$)?\s*(?:-|–|—|den|to)\s*\$?\s*\d", value):
@@ -697,6 +811,18 @@ def normalize_salary(row, usd_to_vnd=25000):
     currency = text(row.get("currency")).upper()
     unit = text(row.get("salary_unit")).upper()
     corrections = []
+    label = fold(row.get("salary_text"))
+    if re.search(r"thuong luong|thoa thuan|negotiable|you.ll love|attractive|competitive", label) and not re.search(r"\d", label):
+        return {"salary_type": "negotiable", "salary_display": "Theo thỏa thuận",
+                "salary_min_vnd_month": None, "salary_max_vnd_month": None,
+                "salary_mid_vnd_month": None, "salary_outlier_flag": 0,
+                "_salary_normalization_note": "No numeric label for negotiated/undisclosed salary"}
+    # Explicit salary text is authoritative when it supplies numeric bounds
+    # and currency; this repairs parser errors while preserving raw columns.
+    if p_currency in {"VND", "USD"} and (p_lo is not None or p_hi is not None):
+        if lo != p_lo or hi != p_hi:
+            corrections.append("bounds from explicit salary_text override raw numeric values")
+        lo, hi = p_lo, p_hi
     if p_currency in {"VND", "USD"} and p_currency != currency:
         corrections.append(f"currency {currency or 'missing'} -> {p_currency} from explicit salary text")
         currency = p_currency
@@ -831,9 +957,52 @@ def add_skill_features(jobs):
         ).astype("int8")
     return selected
 
+def add_location_type_features(jobs):
+    selected = jobs.copy()
+    for name, label in JOB_LOCATION_FEATURES.items():
+        selected[f"job_location_{name}"] = selected["job_location_type_std"].map(
+            lambda value: int(label in {part.strip() for part in text(value).split(";")})
+        ).astype("int8")
+    return selected
+
+
+def training_reasons(row):
+    reasons = []
+    missing_tokens = {"", "unknown", "nan", "none", "null", "n/a", "na", "<na>"}
+    for column in REQUIRED_TRAIN_CATEGORIES:
+        parts = [fold(part) for part in text(row.get(column)).split(";")]
+        if any(part in missing_tokens for part in parts):
+            reasons.append(f"missing_or_unknown_{column}")
+    location_types = {part.strip() for part in text(row.get("job_location_type_std")).split(";")}
+    if not location_types.issubset(set(JOB_LOCATION_FEATURES.values())):
+        reasons.append("invalid_job_location_type")
+    experience = number(row.get("experience_years"))
+    if experience is None or experience < 0:
+        reasons.append("missing_or_invalid_experience_years")
+    target = number(row.get("salary_mid_million"))
+    if row["salary_type"] != "range":
+        reasons.append("salary_not_two_sided_range")
+    if target is None or not 1 <= target <= 300:
+        reasons.append("target_missing_or_outside_fixed_1_300_million")
+    if text(row.get("job_role_std")) == "Other":
+        reasons.append("role_unclassified_review_it_scope")
+    if not text(row["title"]):
+        reasons.append("missing_title")
+    title = fold(row.get("title"))
+    if re.search(r"duoc pham|may mac|det may|thuc pham|xay dung|cong trinh|co khi|san xuat", title) and not re.search(r"software|cntt|phan mem|\bit\b", title):
+        reasons.append("non_it_industry_title_review")
+    if text(row.get("job_role_std")) in {"QA/Tester", "Project Manager", "Product Manager"}:
+        evidence = fold(" ".join(text(row.get(c)) for c in ["title", "requirements", "description", "skills_std"]))
+        if not re.search(r"software|phan mem|cntt|cong nghe thong tin|\bit\b|\bapi\b|\bsql\b|\bweb\b|selenium|test case|testcase|scrum|\bapp\b|mobile|lap trinh|developer|devops", evidence):
+            reasons.append("generic_role_without_it_evidence")
+    return ";".join(reasons)
+
+
 def build_train(jobs):
-    selected = jobs.loc[jobs["salary_type"].eq("range") & jobs["salary_mid_million"].notna()].copy()
-    return add_skill_features(selected)[TRAIN_COLUMNS].reset_index(drop=True)
+    selected = jobs.loc[jobs.apply(training_reasons, axis=1).eq("")].copy()
+    selected["company_group"] = selected.apply(
+        lambda row: company_key(row["company"]) or row["job_uid"], axis=1)
+    return add_location_type_features(add_skill_features(selected))[TRAIN_COLUMNS].reset_index(drop=True)
 
 def atomic_csv(frame, path):
     path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
@@ -841,10 +1010,10 @@ def atomic_csv(frame, path):
     frame.to_csv(temporary, index=False, encoding="utf-8-sig", na_rep="", float_format="%.10g")
     temporary.replace(path)
 
-def run(root, output_dir, as_of, usd_to_vnd=25000, snapshot_ref="unknown", input_dir=None):
+def run(root, output_dir, as_of, usd_to_vnd=None, snapshot_ref="unknown", input_dir=None, fx_metadata=None):
     root, output_dir = Path(root).resolve(), Path(output_dir).resolve()
-    if usd_to_vnd <= 0:
-        raise ValueError("USD conversion rate must be positive")
+    fx_metadata = validate_fx_snapshot(fx_metadata) if fx_metadata is not None else resolve_fx(usd_to_vnd)
+    usd_to_vnd = fx_metadata["usd_to_vnd"]
     frames, inputs, paths = [], {}, []
     for source, relative in SOURCE_FILES.items():
         path = Path(input_dir) / Path(relative).name if input_dir else root / relative
@@ -868,9 +1037,14 @@ def run(root, output_dir, as_of, usd_to_vnd=25000, snapshot_ref="unknown", input
                 "title": row["title"], "field": "job_role_std", "previous_value": role_before,
                 "new_value": row["job_role_std"], **role_evidence})
         row["location_std"] = normalize_location(row)
-        row["level_std"] = normalize_level(row)
         row["experience_min"], row["experience_max"] = normalize_experience(row)
         row["experience_years"] = row["experience_min"]
+        row["level_std"], row["level_source"] = infer_level(row)
+        if row["level_source"] == "experience_rule":
+            classification_updates.append({"job_uid": row["job_uid"], "source": row["source"],
+                "title": row["title"], "field": "level_std", "previous_value": "Unknown",
+                "new_value": row["level_std"], "evidence_field": "experience_years",
+                "evidence": str(row["experience_years"]), "rule": "minimum_experience_seniority"})
         row["skills_std"] = normalize_skills(row)
         work_before = normalize_work_type(row["work_type_raw"])
         work_unknown_before += int(work_before == "Unknown")
@@ -915,7 +1089,7 @@ def run(root, output_dir, as_of, usd_to_vnd=25000, snapshot_ref="unknown", input
     jobs = jobs[JOBS_COLUMNS].sort_values(["source", "job_id"], kind="stable").reset_index(drop=True)
     train = build_train(jobs)
     assert jobs["job_uid"].is_unique
-    assert len(train) == int((jobs.salary_type.eq("range") & jobs.salary_mid_million.notna()).sum())
+    assert len(train) == int(jobs.apply(training_reasons, axis=1).eq("").sum())
     assert train.job_uid.is_unique and train.salary_mid_million.notna().all()
     for column in HISTORY_COLUMNS:
         jobs[column] = jobs[column].map(lambda v: timestamp(v).isoformat() if pd.notna(timestamp(v)) else pd.NA)
@@ -923,13 +1097,16 @@ def run(root, output_dir, as_of, usd_to_vnd=25000, snapshot_ref="unknown", input
         raise ValueError("Output paths must not overwrite input files")
     atomic_csv(jobs, output_dir / "jobs_clean.csv")
     atomic_csv(train, output_dir / "salary_train.csv")
+    eligibility = jobs[["job_uid", "source", "title", "salary_text", "job_role_std"]].copy()
+    eligibility["exclusion_reason"] = jobs.apply(training_reasons, axis=1)
+    atomic_csv(eligibility, output_dir / "training_eligibility.csv")
     atomic_csv(pd.DataFrame(normalization_issues, columns=["job_uid", "currency_raw", "salary_unit_raw", "salary_text", "salary_type", "normalization_note"]), output_dir / "salary_normalization_issues.csv")
     atomic_csv(pd.DataFrame(classification_updates, columns=ROLE_CHANGE_COLUMNS), output_dir / "classification_updates.csv")
     unchanged = {source: sha256(path) == inputs[source]["sha256"] for source, path in zip(SOURCE_FILES, paths)}
     assert all(unchanged.values()), "Raw input changed during processing"
     report = {
         "snapshot_ref": snapshot_ref, "as_of": as_of.isoformat(),
-        "usd_to_vnd_assumption": usd_to_vnd, "inputs": inputs,
+        "usd_to_vnd": usd_to_vnd, "exchange_rate": fx_metadata, "inputs": inputs,
         "raw_files_unchanged": unchanged, "input_rows": sum(v["rows"] for v in inputs.values()),
         "jobs_clean_rows": len(jobs), "salary_train_rows": len(train),
         "jobs_clean_columns": len(JOBS_COLUMNS), "salary_train_columns": len(TRAIN_COLUMNS),
@@ -940,7 +1117,15 @@ def run(root, output_dir, as_of, usd_to_vnd=25000, snapshot_ref="unknown", input
         "status_counts": jobs.status.value_counts().to_dict(),
         "job_role_counts": jobs.job_role_std.value_counts().to_dict(),
         "work_type_counts": jobs.work_type_std.value_counts().to_dict(),
+        "level_counts": jobs.level_std.value_counts().to_dict(),
+        "level_source_counts": jobs.level_source.value_counts().to_dict(),
+        "level_experience_rules": LEVEL_EXPERIENCE_RULES,
+        "features": FEATURES,
+        "categorical_features": CATEGORICAL_FEATURES,
+        "job_location_features": JOB_LOCATION_FEATURES,
+        "training_exclusion_counts": jobs.apply(training_reasons, axis=1).str.split(";").explode().loc[lambda x: x.ne("")].value_counts().to_dict(),
         "classification_fallback": {
+            "level_estimated_from_experience": int(jobs.level_source.eq("experience_rule").sum()),
             "work_type_unknown_before": work_unknown_before,
             "work_type_unknown_after": int(jobs.work_type_std.eq("Unknown").sum()),
             "work_type_updated": work_unknown_before - int(jobs.work_type_std.eq("Unknown").sum()),
@@ -959,12 +1144,16 @@ def run(root, output_dir, as_of, usd_to_vnd=25000, snapshot_ref="unknown", input
             "Unknown currency/monthly unit or ambiguous small VND values have no numeric target.",
             "Numeric employment IDs are not guessed; Unknown work types fall back to title then explicit description phrases.",
             "Other job roles fall back to description duties with title cues; unclear or conflicting evidence stays Other.",
+            "Explicit raw/title seniority is preserved; missing level falls back to minimum years: <1 Fresher, 1..<3 Junior, 3..<5 Middle, >=5 Senior. Project estimates, not universal standards.",
+            "level_source records raw/title/experience_rule/unknown; it is audit metadata, not a model feature. Missing experience stays missing; no management level is inferred from years alone.",
             "Missing first_seen/last_seen/collected_at are not invented from posted_date.",
             "Status uses source status and validity deadline at as_of, not a live website check.",
             "Outliers and cross-source potential duplicates are marked, never deleted.",
-            "Train is exactly salary_type=range AND salary_mid_million is non-null.",
+            "Train excludes blank/Unknown required categorical features and missing/negative experience. Zero experience and all-zero skills are valid. Location types use three fixed binary multi-hot columns; raw/std text stays in jobs_clean. Other categorical features still require encoding in the model pipeline.",
+            "Train: two-sided salary range, fixed 1..300 million/month target, classified role; no dataset-quantile outlier filtering. Expired jobs retained as historical examples.",
         ],
     }
+    (output_dir / "fx_snapshot.json").write_text(json.dumps(fx_metadata, ensure_ascii=False, indent=2), encoding="utf-8")
     (output_dir / "cleaning_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     return jobs, train, report
 
@@ -976,16 +1165,25 @@ def main():
     default=Path(__file__).resolve().parent.parent,
     help="CareerPredict repository root"
     )
-    parser.add_argument("--input-dir", type=Path, help="Optional flat directory holding the four raw CSVs")
+    parser.add_argument("--input-dir", type=Path, help="Optional flat directory holding the three raw CSVs")
     parser.add_argument("--output-dir", type=Path, default=Path(__file__).resolve().parent / "output")
     parser.add_argument("--as-of", default=pd.Timestamp.now(tz="Asia/Ho_Chi_Minh").isoformat())
-    parser.add_argument("--usd-to-vnd", type=float, default=25000, help="Explicit analytical assumption, not a live rate")
+    fx_group = parser.add_mutually_exclusive_group()
+    fx_group.add_argument("--usd-to-vnd", type=float, help="Manual override; omit to fetch the latest USD/VND rate")
+    fx_group.add_argument("--fx-file", type=Path, help="Reuse a saved fx_snapshot.json without network access")
     parser.add_argument("--snapshot-ref", default="unknown")
     args = parser.parse_args()
     as_of = timestamp(args.as_of)
     if pd.isna(as_of):
         parser.error("Invalid --as-of")
-    _, _, report = run(args.root, args.output_dir, as_of, args.usd_to_vnd, args.snapshot_ref, args.input_dir)
+    try:
+        fx_metadata = resolve_fx(args.usd_to_vnd, args.fx_file)
+    except (RuntimeError, ValueError, OSError) as exc:
+        parser.error(str(exc))
+    print(f"USD/VND: {fx_metadata['usd_to_vnd']:,.4f} | mode={fx_metadata['mode']} | "
+          f"provider_updated_at={fx_metadata.get('provider_updated_at_utc')}")
+    _, _, report = run(args.root, args.output_dir, as_of,
+                       fx_metadata["usd_to_vnd"], args.snapshot_ref, args.input_dir, fx_metadata)
     print(json.dumps({k: report[k] for k in ["jobs_clean_rows", "salary_train_rows", "source_counts", "train_source_counts", "salary_types", "classification_fallback", "raw_files_unchanged"]}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":

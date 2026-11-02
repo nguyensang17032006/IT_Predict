@@ -1,0 +1,4835 @@
+{
+  "source": "TopCV",
+  "checked_at": "2026-10-28T21:04:36+07:00",
+  "collected_at": "2026-10-28T11:26:08+07:00",
+  "search_scope": "https://www.topcv.vn/tim-viec-lam-cong-nghe-thong-tin-cr257",
+  "crawl_complete": true,
+  "counts": {
+    "added": 0,
+    "expired": 22,
+    "reactivated": 0,
+    "observed": 2683,
+    "history_duplicates_merged": 0,
+    "history_ids_repaired_from_url": 0,
+    "missing_unverified": 1477,
+    "verified_active": 0
+  },
+  "scan": {
+    "initial_total": 2710,
+    "latest_total": 2712,
+    "expected_pages": 55,
+    "pages_completed": 55,
+    "unique_jobs": 2683,
+    "overlap_count": 29,
+    "total_changes": [
+      {
+        "page": 13,
+        "before": 2710,
+        "after": 2711
+      },
+      {
+        "page": 42,
+        "before": 2711,
+        "after": 2712
+      }
+    ],
+    "stop_reason": "Đã quét đến trang cuối theo tổng tin hiện tại.",
+    "snapshot_consistent": false,
+    "page_attempts": [
+      {
+        "page": 1,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:55:16+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:55:39+07:00",
+        "ready": true
+      },
+      {
+        "page": 2,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:55:51+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:56:13+07:00",
+        "ready": true
+      },
+      {
+        "page": 3,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:56:25+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:56:50+07:00",
+        "ready": true
+      },
+      {
+        "page": 4,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:57:02+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:57:30+07:00",
+        "ready": true
+      },
+      {
+        "page": 5,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:57:43+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:58:05+07:00",
+        "ready": true
+      },
+      {
+        "page": 6,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:58:17+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:58:39+07:00",
+        "ready": true
+      },
+      {
+        "page": 7,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:58:51+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:59:13+07:00",
+        "ready": true
+      },
+      {
+        "page": 8,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:59:25+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T10:59:44+07:00",
+        "ready": true
+      },
+      {
+        "page": 9,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T10:59:56+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:00:18+07:00",
+        "ready": true
+      },
+      {
+        "page": 10,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:00:30+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:00:54+07:00",
+        "ready": true
+      },
+      {
+        "page": 11,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:01:06+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:01:35+07:00",
+        "ready": true
+      },
+      {
+        "page": 12,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:01:48+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:02:15+07:00",
+        "ready": true
+      },
+      {
+        "page": 13,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:02:26+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:02:48+07:00",
+        "ready": true
+      },
+      {
+        "page": 14,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:03:01+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:03:20+07:00",
+        "ready": true
+      },
+      {
+        "page": 15,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:03:32+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:03:54+07:00",
+        "ready": true
+      },
+      {
+        "page": 16,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:04:05+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:04:28+07:00",
+        "ready": true
+      },
+      {
+        "page": 17,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:04:40+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:04:59+07:00",
+        "ready": true
+      },
+      {
+        "page": 18,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:05:11+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:05:32+07:00",
+        "ready": true
+      },
+      {
+        "page": 19,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:05:44+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:06:05+07:00",
+        "ready": true
+      },
+      {
+        "page": 20,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:06:17+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:06:36+07:00",
+        "ready": true
+      },
+      {
+        "page": 21,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:06:48+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:07:12+07:00",
+        "ready": true
+      },
+      {
+        "page": 22,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:07:24+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:07:49+07:00",
+        "ready": true
+      },
+      {
+        "page": 23,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:08:01+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:08:21+07:00",
+        "ready": true
+      },
+      {
+        "page": 24,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:08:33+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:08:57+07:00",
+        "ready": true
+      },
+      {
+        "page": 25,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:09:09+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:09:33+07:00",
+        "ready": true
+      },
+      {
+        "page": 26,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:09:45+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:10:04+07:00",
+        "ready": true
+      },
+      {
+        "page": 27,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:10:16+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:10:39+07:00",
+        "ready": true
+      },
+      {
+        "page": 28,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:10:51+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:11:14+07:00",
+        "ready": true
+      },
+      {
+        "page": 29,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:11:26+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:11:49+07:00",
+        "ready": true
+      },
+      {
+        "page": 30,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:12:01+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:12:23+07:00",
+        "ready": true
+      },
+      {
+        "page": 31,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:12:35+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:12:56+07:00",
+        "ready": true
+      },
+      {
+        "page": 32,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:13:08+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:13:30+07:00",
+        "ready": true
+      },
+      {
+        "page": 33,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:13:42+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:14:03+07:00",
+        "ready": true
+      },
+      {
+        "page": 34,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:14:15+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:14:35+07:00",
+        "ready": true
+      },
+      {
+        "page": 35,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:14:47+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:15:07+07:00",
+        "ready": true
+      },
+      {
+        "page": 36,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:15:19+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:15:39+07:00",
+        "ready": true
+      },
+      {
+        "page": 37,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:15:51+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:16:12+07:00",
+        "ready": true
+      },
+      {
+        "page": 38,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:16:24+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:16:44+07:00",
+        "ready": true
+      },
+      {
+        "page": 39,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:16:56+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:17:18+07:00",
+        "ready": true
+      },
+      {
+        "page": 40,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:17:30+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:17:51+07:00",
+        "ready": true
+      },
+      {
+        "page": 41,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:18:03+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:18:22+07:00",
+        "ready": true
+      },
+      {
+        "page": 42,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:18:34+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:18:54+07:00",
+        "ready": true
+      },
+      {
+        "page": 43,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:19:06+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:19:29+07:00",
+        "ready": true
+      },
+      {
+        "page": 44,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:19:41+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:20:02+07:00",
+        "ready": true
+      },
+      {
+        "page": 45,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:20:14+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:20:38+07:00",
+        "ready": true
+      },
+      {
+        "page": 46,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:20:50+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:21:13+07:00",
+        "ready": true
+      },
+      {
+        "page": 47,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:21:25+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:21:51+07:00",
+        "ready": true
+      },
+      {
+        "page": 48,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:22:03+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:22:22+07:00",
+        "ready": true
+      },
+      {
+        "page": 49,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:22:34+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:22:56+07:00",
+        "ready": true
+      },
+      {
+        "page": 50,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:23:08+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:23:27+07:00",
+        "ready": true
+      },
+      {
+        "page": 51,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:23:39+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:24:00+07:00",
+        "ready": true
+      },
+      {
+        "page": 52,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:24:12+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:24:33+07:00",
+        "ready": true
+      },
+      {
+        "page": 53,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:24:45+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:25:07+07:00",
+        "ready": true
+      },
+      {
+        "page": 54,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:25:19+07:00",
+        "http_status": 200,
+        "links": 50,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:25:39+07:00",
+        "ready": true
+      },
+      {
+        "page": 55,
+        "browser_round": 1,
+        "attempt": 1,
+        "started_at": "2026-10-28T11:25:51+07:00",
+        "http_status": 200,
+        "links": 12,
+        "retry_after_seconds": 0,
+        "finished_at": "2026-10-28T11:26:07+07:00",
+        "ready": true
+      }
+    ],
+    "browser_recoveries": [],
+    "collected_rows": 2712,
+    "duplicates_removed": 29,
+    "crawl_complete": true
+  },
+  "missing_candidates": 2020,
+  "detail_verifications": {
+    "https://www.topcv.vn/viec-lam/ky-su-phat-trien-he-thong-nhung/2262740.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:13:32+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/nhan-vien-thiet-ke/2294955.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:13:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/nhan-vien-tieng-han-bo-phan-tuan-thu-cong-nghe-thong-tin-chap-nhan-fresher-thu-nhap-tu-18-trieu/2297340.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:14:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/product-owner-mobile-app/1966231.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:14:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/qa-tester-automation/2294491.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:14:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/retail-designer-intern/2304750.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:14:48+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/senior-java-backend-developer-spring-boot/2290896.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:15:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ux-ui-design-intern/1847849.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:15:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/abbank/tuyen-dung/senior-developer-j2298045.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:15:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/basicmedical/tuyen-dung/chuyen-vien-thiet-ke-do-hoa-j1995084.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:15:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/chicilonmedia/tuyen-dung/product-owner-po-j2263505.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:16:18+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/backend-developer-cloud-product-golang-python-j2296967.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:16:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/chuyen-vien-phat-trien-he-thong-phan-tich-nghiep-vu-j1909967.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:16:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/chuyen-vien-quan-tri-du-an-it-project-manager-j1568113.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:16:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/chuyen-vien-trien-khai-cyber-security-unit-j2310723.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:17:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/it-helpdesk-co-phu-cap-di-lai-va-nha-o-j2147557.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:17:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/it-helpdesk-team-lead-co-phu-cap-di-lai-nha-o-j1704131.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:17:42+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/microsoft-365-engineer-j2295446.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:17:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/network-cloud-engineer-j2296878.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:18:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/project-manager-j2291038.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:18:30+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/senior-it-helpdesk-j2288978.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:18:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/senior-system-administrator-l3-j2311053.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:19:06+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/system-engineer-co-phu-cap-di-lai-nha-o-j1910775.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:19:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cnvholdings/tuyen-dung/nhan-vien-kinh-doanh-sales-b2b-nhan-vien-tu-van-15-40m-nghi-t7-cn-j2265135.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:19:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/congtycophangsm/tuyen-dung/data-analyst-van-hanh-xanh-bike-lam-viec-tai-royal-city-ha-noi-j2300763.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:19:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/congtycophangsm/tuyen-dung/giam-sat-van-hanh-j2306391.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:20:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/educa/tuyen-dung/growth-strategy-analytics-specialist-luong-upto-35m-thuong-tai-ha-noi-j2289915.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:20:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/fptsoftwareacademy/tuyen-dung/security-analyst-intern-soc-j1846928.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:20:52+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/gpbank/tuyen-dung/business-analyst-data-banking-j2148615.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:21:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/happymoney/tuyen-dung/business-analyst-j2166715.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:21:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/happymoney/tuyen-dung/designer-chuyen-vien-thiet-ke-j2297434.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:21:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/lcfoods/tuyen-dung/social-graphic-designer-j2305310.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:21:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/lpbank/tuyen-dung/chuyen-vien-cao-cap-van-hanh-co-so-du-lieu-j2299086.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:22:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/misa/tuyen-dung/chuyen-vien-kinh-doanh-tu-van-sale-nen-tang-ke-toan-dich-vu-misa-asp-j2301134.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:22:24+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/misa/tuyen-dung/fresher-web-developer-c-net-jetpay-a-member-company-of-misa-j2306531.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:22:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/misa/tuyen-dung/nhan-vien-xuc-tien-giai-phap-chuyen-doi-so-khoi-co-quan-nha-nuoc-khong-yeu-cau-kinh-nghiem-j2289945.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:22:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/misa/tuyen-dung/product-manager-san-pham-amis-operation-j2294719.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:23:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/misa/tuyen-dung/product-manager-san-pham-bhxh-thue-tncn-j2294726.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T15:24:17+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/msbank/tuyen-dung/chuyen-vien-quan-tri-mang-network-administrator-sbsi-4g047-j2299317.html": {
+      "state": "expired",
+      "reason": "explicit_expired_notice",
+      "checked_at": "2026-10-28T15:24:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/nabativietnam/tuyen-dung/business-technology-supervisor-j2305773.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:22:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/nganhangthuongmaicophanquandoi/tuyen-dung/chuyen-vien-cao-cap-chuyen-gia-kiem-dinh-mo-hinh-kinh-doanh-senior-business-model-validation-analyst-bi-khoi-du-lieu-2026td453781-j2313254.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:22:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/nganhangthuongmaicophanquandoi/tuyen-dung/chuyen-vien-cao-cap-cong-nghe-mo-hinh-senior-machine-learning-engineer-khoi-du-lieu-2026td456629-j2313245.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:22:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/nganhangthuongmaicophanquandoi/tuyen-dung/chuyen-vien-giam-sat-dich-vu-cong-nghe-it-operation-monitoring-khoi-cong-nghe-thong-tin-2025td1122-j2296245.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:22:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/nganhangthuongmaicophanquandoi/tuyen-dung/pho-phong-cong-nghe-mo-hinh-deputy-head-of-machine-learning-engineering-khoi-du-lieu-2026td456609-j2313250.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:22:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/nganhangthuongmaicophanquandoi/tuyen-dung/truong-phong-nen-tang-kiem-thu-head-of-testing-platform-automation-test-performance-test-khoi-cong-nghe-thong-tin-2026td457052-j2297040.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:22:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/sapovn/tuyen-dung/cong-tac-vien-an-toan-thong-tin-j2313490.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/sapovn/tuyen-dung/data-engineer-tu-2-nam-kinh-nghiem-j2296722.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/sapovn/tuyen-dung/process-quality-assurances-junior-j2299376.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/sapovn/tuyen-dung/security-engineer-j2026981.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:30+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/shinhanfinance1/tuyen-dung/java-developer-ai-driven-development-j2309427.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/shinhanfinance1/tuyen-dung/java-development-assistant-manager-ai-driven-development-j2309461.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/smartosc/tuyen-dung/data-engineer-english-speaking-j2277876.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:42+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/smartosc/tuyen-dung/l3-engineer-technical-escalation-1-fte-j2311203.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/smartosc/tuyen-dung/senior-ai-engineer-good-english-j2258880.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:49+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/smartosc/tuyen-dung/senior-process-quality-assurance-j2258871.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:53+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/smartosc/tuyen-dung/software-process-control-specialist-pqa-j2302599.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:23:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/smartosc/tuyen-dung/technical-lead-node-js-j2294090.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:24:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/topcv/tuyen-dung/business-development-intern-j2289927.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:24:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/topcv/tuyen-dung/fullstack-developer-j2259292.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:24:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/topcv/tuyen-dung/product-executive-san-pham-saas-j2303865.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:24:12+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/transcosmoshochiminh/tuyen-dung/data-analyst-workforce-management-analyst-j2294996.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:24:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/vnresource1209/tuyen-dung/lap-trinh-vien-net-j2303376.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:24:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/vus-etsc/tuyen-dung/multimedia-designer-graphic-designer-executive-j2296429.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:27:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-ai-artist/2276335.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:27:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-artist/1890786.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:28:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-concept-artist-senior/2304702.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:30:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-concept-artist/2301661.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:30:41+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-game-animator/2178855.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:31:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-game-artist-junior-middle/2293566.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:33:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-game-artist-leader/2294334.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:33:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-game-artist/1271947.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:33:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-game-artist/1992543.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:33:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-game-artist/2290250.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:34:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-illustrator-storybook-artist/2297714.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:34:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-motion-designer/2297604.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:34:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-pixel-artist-background-character-monster/2181242.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:34:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/2d-ui-ux-artist/2220677.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:35:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-animator/2220197.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:37:06+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-artist-dien-hoa-vien-3d/2025380.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:37:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-blender/1482859.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:38:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-designer-event-stage-exhibition/2283012.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:38:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-game-artist/2308355.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:39:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-modeling-designer/2301566.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:39:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/3d-motion-designer/2297609.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:39:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/account-executive/2288576.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:40:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/account-manager/2206388.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:40:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/account-manager/2286186.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:40:24+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ads-monetization-mo-mobile-apps/2215953.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:41:32+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ads-monetization-optimizer-mobile-app-game/2294501.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:41:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/aem-developer-java-sling-osgi/2294792.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:41:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-automation-engineer-llm-ai-agents/2289510.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:43:06+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-automation-specialist-tai-upbase-ai-ecommerce/2292432.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:43:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-automation-specialist/2295788.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:43:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-compiler-embedded-systems-intern-full-time/2295661.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:43:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-engineer-intern/2313038.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:44:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-engineer-lead/2178330.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:44:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-engineer-product-agentic-llm-nlp/2306535.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:44:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-engineer/2136061.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:45:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-engineer/2296379.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:45:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-engineer/2306163.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:45:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-it-support-specialist-tieng-anh-tot-1-nam-kinh-nghiem-lam-viec-tai-long-binh-hcm-phuc-loi-tot-thu-nhap-10-15-trieu/2291865.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:45:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-lead/2166770.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:46:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-leader/1797615.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:46:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-product-builder/2141541.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:48:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-product-owner-product-manager-ai-robot-edtech/2010194.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:48:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-quantitative-researcher-intern/2005497.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:49:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-security-researcher/2304479.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:49:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ai-visual-designer/2156494.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:52:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/android-developer-lead/2139325.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:52:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/android-developer-leader-banking/2290732.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:52:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/android-developer-leader/2309670.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:53:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/android-developer-onsite-bank/1539938.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:53:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/android-developer/2158298.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:53:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/android-developer/2292974.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:53:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/angular-developer-junior/2303401.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:54:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/angular-developer-lead/2312498.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:54:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/angular-leader/2298194.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:55:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/applied-ai-engineer/2300778.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:56:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/appsec-devops-devsecops-engineer/1986320.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:56:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/artist-2d-game-tu-01-nam-kinh-nghiem/1254240.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:56:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/artist-2d-game/1049053.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:56:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/associate-product-manager-san-pham-tai-chinh-khoi-co-quan-nha-nuoc/2291737.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:57:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/automation-test-engineer-ha-noi/2116486.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:57:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/automation-test/2292624.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:58:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/automation-tester-leader/2306234.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:58:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/automation-tester-saas-product-3-nam-kinh-nghiem-thu-nhap-upto-35m-tai-ha-noi/2295033.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:59:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/automation-tester-truong-nhom/2299408.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T01:59:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/aws-data-engineer-os-bank-lead/2267172.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:00:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ba-lead-du-an-gov/2301346.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:00:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/back-end-developer-c-net-sql/1655990.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:01:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-developer-go-tai-ha-noi/2291383.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:01:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-developer-golang/1664006.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:01:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-developer-net-middle/2300328.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:03:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-developer-nodejs-typescript-ai-agent/2237509.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:03:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-developer/2297487.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:03:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-developer/2307270.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:04:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-engineer-leader/2310474.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:04:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-engineer-nodejs/2013810.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:04:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/backend-java-lead-os-bank/2312000.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:05:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/blockchain-developer-luong-15-25-trieu-di-lam-ngay-yeu-cau-3-nam-kinh-nghiem/2301433.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:05:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/brand-design-intern/2300180.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:06:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/brand-designer/2186842.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:06:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/brand-packaging-design-executive/2311294.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:06:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/bridge-software-engineer/1533705.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:07:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/bridge-system-engineer-brse-tieng-nhat-n2/2301471.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:07:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/bridge-system-engineer-n2/2297567.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:07:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/brse-ky-su-cau-noi/1800108.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:07:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/brse-ky-su-cau-noi/1800154.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:08:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/brse-se/2187764.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:08:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-ai/2016408.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:09:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-ba-luong-13-25-trieu-di-lam-luon/1838202.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:09:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-ba-tieng-nhat/991213.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:10:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-banking-fintech/2305642.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:10:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-chuyen-vien-phan-tich-nghiep-vu/2292724.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:10:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-co-kinh-nghiem-erp-thu-nhap-len-den-25m-lam-viec-tai-cau-giay-day-du-che-do-dai-ngo/2240993.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:10:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-domain-erp-quan-tri-doanh-nghiep/2293254.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:12:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-du-an-chinh-phu-5-nam-kinh-nghiem/2047714.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:13:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-erp-hoa-don-bao-hiem-xang-dau/2256885.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:13:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-fintech-luong-khoi-diem-tu-20-trieu/2300251.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:13:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-fresher/2206736.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:14:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-in-house/2299051.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:14:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-lead-government-domain/2296774.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:14:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-lead-lending-investment/2292738.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:15:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-lead/2274582.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:15:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-lead/2287989.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:15:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-lead/2293845.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:15:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-lead/2306240.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:16:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-level-middle-senior/1055682.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:17:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-luong-up-to-25tr/2309519.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:17:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-middle/2308400.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:18:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-phan-tich-nghiep-vu-du-an-giao-duc-up-to-40tr/2310997.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:18:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-retail-product-domain-san-pham-quan-ly-nha-hang-fnb/2300496.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:18:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-software-development/2203202.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:18:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst-t24-lead-os-bank/2266961.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:18:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst/2159778.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:19:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst/2308266.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:21:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-analyst/2312380.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:21:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-consultant-san-pham-erp/2299114.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:22:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-b2b-phat-trien-kinh-doanh/1952674.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:22:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-executive-data-san-edtech/1713847.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:22:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-executive-sales-it/1794195.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:22:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-executive/2203326.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:22:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-executive/2259844.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:24:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-executive/2262390.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:24:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-intern/2250999.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:24:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-manager/2121999.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:24:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-development-support/2312093.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:25:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/business-process-automation-analyst/2313030.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:26:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/c-c-developer/2296380.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:26:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/c-developer/1805066.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:26:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/can-bo-ho-tro-quan-ly-san-pham-pm-admin/2296347.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:26:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chef-de-projet-bilingue-franais-vietnamien/2309919.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:27:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chu-quan-it/2309251.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:27:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-gia-an-ninh-bao-mat/2290829.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:27:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-gia-trien-khai-va-van-hanh-he-thong-scm/2111336.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:29:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ai-ai-engineer-tai-ha-noi-luong-upto-25-trieu/2290587.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:30:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-an-ninh-bao-mat-du-an-meey-chat/2303386.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:30:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-big-data-middle/2216344.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:30:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-cao-cap-he-thong-bao-cao-quan-tri/2213717.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:30:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-cao-cap-phan-tich-nghiep-vu-kenh-ngan-hang-so/1647922.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:30:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-chuyen-doi-so/2288304.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:31:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-cong-nghe-tich-hop-he-thong/2252537.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:32:21+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-dam-bao-hoat-dong-ha-tang-thiet-bi/1955046.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:32:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-dieu-phoi-du-an/2262575.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:32:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-du-nguon-designer-intern/2311307.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:32:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-erp/2000521.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:33:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-giai-phap-cong-nghe-pm/2228350.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:33:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-giam-sat-va-van-hanh-attt/2013821.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:33:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-graphic-design-video-edit/2299666.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:33:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-graphic-designer/2259344.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:34:48+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-graphic-designer/2312841.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:35:08+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ha-tang-cntt/2256292.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:35:13+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ha-tang-cong-nghe-thong-tin/2307663.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:35:32+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-he-thong-du-lieu-data-it/2274927.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:35:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-he-thong-system-engineer/2006658.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:35:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-helpdesk-support-system-admin/1914176.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:36:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it-he-thong-erp/2311966.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:37:12+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it-he-thong/2313671.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:37:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it-helpdesk/2283670.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:37:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it-helpdesk/2290859.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:38:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it-riskinformation-security-it-grc/2294730.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:38:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it-support/2293490.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:38:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-it/2299409.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:39:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ket-noi-hanh-chinh-cong/2313232.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:41:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-khoa-hoc-du-lieu-ds/2305399.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:41:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-du-lieu-data-tester/2312886.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:42:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-phan-mem-hop-dong-thoi-vu/2300381.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:42:24+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-phan-mem-manual-test/2068842.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:42:44+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-phan-mem-manual/2302905.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:43:04+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-phan-mem-tester-he-thong-erp/2297141.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:43:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-phan-mem-tester/1574142.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:43:28+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kiem-thu-tester/2304739.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:43:33+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kien-truc-he-thong-phan-mem/2145718.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:43:53+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-b2b-b2g-trustid/2227620.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:44:32+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-b2b-giai-phap-mes-iot/2308004.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:44:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-b2b-ito-manage-service/1894140.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:44:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-b2b-mang-phan-mem-tai-ha-noi-da-nang-ho-chi-minh/2282021.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:45:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-b2b/1195417.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:46:12+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-b2b/2301618.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:46:17+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-business-development-saas/2291778.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:46:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-cap-cao-phan-khuc-edb/2148682.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:46:41+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-chuoi-dich-vu-cong-nghe-thu-nhap-upto-30-trieu-yeu-cau-3-nam-kinh-nghiem-tu-25-tuoi/2298340.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:47:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-du-an-cntt-b2b-khoi-gov/1220809.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:47:06+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-du-an-cntt-khach-hang-ent/1003867.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:47:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-du-an/1723214.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:47:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-giai-phap-cong-nghe/2301642.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:48:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-mang-cong-nghe-b2b/2057665.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:50:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem-enterprise/2312998.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:50:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem-kiotviet/2297286.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:50:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem-sales-am-tai-ha-noi/2297533.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:50:49+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem-thu-2-thu-6/2221144.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:51:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem-y-te/1401719.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:51:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem/1333494.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:51:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem/2302791.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:51:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phan-mem/2308413.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:51:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-phat-trien-phan-mem/2132615.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:53:08+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-sales-b2b-giai-phap-phan-mem-cad-cam-thu-nhap-2030m-luong-thuong/2090745.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:53:13+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh-sales-it-software/1675981.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:53:33+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh/1796391.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:54:42+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh/1946284.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:55:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-kinh-doanh/2305650.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:55:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-lap-trinh-app-android-tu-1-5-nam-kn/2296265.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:55:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-master-data-analyst-thu-nhap-18-25m/2284871.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:55:49+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-master-data-van-hanh-sap-b1-rpfo-pos/2272113.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:56:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-nghien-cuu-phat-trien-san-pham/2300809.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:57:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-nghien-cuu-va-phat-trien-rd/2145733.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:57:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-doanh-thu-revenue-analyst/1738456.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:57:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-du-lieu-mo-hinh-rui-ro-fintech-bank/2291264.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:58:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-ba/2300676.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:58:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst-ba-tu-3-nam-kinh-nghiem/2310937.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:58:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst-ha-noi-upto-30-trieu/2254265.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:59:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst/1110732.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:59:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst/1803932.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:59:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst/2295611.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T02:59:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst/2298041.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:00:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst/2302543.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:00:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-business-analyst/2305397.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:00:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-cap-cao/2309927.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:00:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-chung-khoan/2297959.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:01:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phan-tich-nghiep-vu-ngan-hang/2302908.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:01:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-doi-tac-sales-b2b-data-co-san-nghi-t7-cn-thu-nhap-trung-binh-10-30-trieu/2288980.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:01:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-he-thong-dev/2291982.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:03:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-phan-mem-java/2302913.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:03:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-phan-mem/1874431.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:03:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-phan-mem/2308023.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:03:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-san-pham-backend/2307804.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:03:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-san-pham-product-owner/2294991.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:04:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-san-pham/2294320.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:04:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-phat-trien-ung-dung/2292016.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:04:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-presales-tu-van-giai-phap-phan-mem/2270573.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:04:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-presales/1480074.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:04:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-presales/1918591.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:05:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-ly-chat-luong/2292279.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:06:33+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-ly-du-an-project-management-ha-noi-thu-nhap-canh-tranh/2313253.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:06:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-he-thong-system-administrator-cau-giay-ha-noi/2298916.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:09:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-he-thong/2157679.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:10:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-mang-it-network/1637295.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:10:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-mang-network/2002662.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:11:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-mang-va-an-ninh-thong-tin/2273352.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:11:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-va-phat-trien-phan-mem-benh-vien/2293858.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:11:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-website/1841058.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:12:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-quan-tri-website/2298525.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:13:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-redteam/2312786.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:13:30+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-scrum-master/2305693.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:13:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-solution-architect-sa/2285229.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:13:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-tester-tu-2-nam-kinh-nghiem/2305363.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:14:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-10-20-trieu-thuong/2306872.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:14:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-2d-3d/2259907.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:14:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-bao-bi-hop-qua-di-lam-ngay/2218616.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:15:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-bat-dong-san-tica-land/2312094.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:15:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-chieu-sang/2288010.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:15:44+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-co-kinh-nghiem-mang-bds/2296555.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:16:04+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-do-hoa-graphic-design-luong-10-15-trieu/2304059.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:16:08+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-do-hoa/2303130.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:18:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-do-hoa/2306456.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:20:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-do-hoa/2306523.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:20:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-graphic-design/2126413.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:20:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-graphic-design/2300226.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:21:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-graphic-design/2309933.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:21:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-graphic-designer/2126436.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:23:06+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-graphic-designer/2294626.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:23:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-graphic-designer/2299766.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:23:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-noi-that-3d/2094015.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:24:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-san-pham-ui-ux-design/2311251.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:24:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-senior-designer/2299326.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:24:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke-va-dan-trang-tap-chi/2256088.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:24:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/1793513.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:24:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/1872739.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:26:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2123763.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:26:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2164018.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:26:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2236213.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:26:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2251463.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:26:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2264422.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:27:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2290526.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:27:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2295522.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:27:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2296759.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:27:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2303768.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:28:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2304387.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:29:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/2308296.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:29:21+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-thiet-ke/984442.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:30:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-trien-khai-du-an/2301276.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:31:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-trien-khai-he-thong-backend/1959768.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:31:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-trien-khai-phan-mem-lam-t2-t6/2305222.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:31:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-tu-van-danh-gia-tieu-chuan/1632037.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:31:40+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-tu-van-giai-phap-phan-mem/2303939.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:32:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-tu-van-nang-cap-phan-mem-upgrade/2300204.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:33:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-tu-van-phan-mem-ban-hang/2296271.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:33:30+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-tu-van-trien-khai-erp/2300290.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:36:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ui-ux/2297956.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:36:05+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ung-dung-ai-senior-ai-gen-ai-engineer/2293972.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:36:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-ung-dung-microsoft-365-ai/2306888.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:36:29+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-van-hanh-cong-nghe-vien-thong/2309555.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:36:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/chuyen-vien-van-hanh-va-quan-tri-ha-tang-mang/2307004.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:37:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-engineer-azure/1352985.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:37:48+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-engineer/2187900.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:38:08+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-openstack-engineer/2312290.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:39:18+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-operation-engineer-ky-su-van-hanh-ha-tang-cloud/2300316.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:39:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-solutions-architect/2305824.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:39:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-technical-sales-pre-sales-specialist/2305809.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:40:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cloud-vmware-engineer/2244513.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:40:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/co-van-phan-mem-erp-biet-tieng-hoa-lam-viec-tai-tp-hcm/2309148.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:40:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/communications-innovation-ai-expert/2303168.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:41:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-ai-comic-sinh-vien/2249291.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:41:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-giang-vien-chuyen-doi-so/2308696.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:42:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-graphic-design/2308047.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:43:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-kinh-doanh-phan-mem-toan-quoc/2288663.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:43:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-kinh-doanh-phan-mem-toan-quoc/2311571.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:33:30+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T15:33:30+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T15:33:30+07:00"
+            }
+          ]
+        }
+      ],
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-thu-thap-du-lieu-thuc-te/2217242.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:43:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-van-hanh-quang-cao/2309852.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:44:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cong-tac-vien-xu-ly-du-lieu-hinh-anh/1911605.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:44:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/content-labelling-nhan-vien-kiem-duyet-va-gan-nhan-noi-dung-no-experience/2308514.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:44:35+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/core-banking-solution-specialist/2300727.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:44:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/core-network-tester-network-tester-telecom-domain/2311128.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:44:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/creative-design-executive/2134839.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:45:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/creative-designer-remote/2306488.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:45:39+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/creative-designer/2291046.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:45:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/creative-designer/2310591.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:46:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/creative-director/2189676.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:46:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/creative-executive-mobile-app/2214511.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:46:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ctv-3d-modeler-mobile-game/2253399.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:47:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ctv-quay-du-lieu-thuc-te/2246661.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:48:32+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ctv-thiet-ke/2304323.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:48:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/ctv-trien-khai-phan-mem-toan-quoc/2298289.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:48:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/customer-support-agent-csa-ios-project/2309261.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:49:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/cybersecurity-engineer/2290605.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:49:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analysis-specialist/2309444.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:50:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analysis-strategy-team-leader-collection/2300211.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:50:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-f21-up-to-1500-net-1-yoe/2303888.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:50:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-junior-middle-mobile-app-sql-power-bi-1225-trieu/1305294.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:50:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-ky-su-phan-tich-du-lieu/1869890.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:51:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-lead-social-intelligence/2307475.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:51:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-lead/2157606.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:51:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-leader/2272110.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:51:52+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-mobile-app-sign-in-bonus-upto-1-thang-luong-trong-thang-9-2026/2293431.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:52:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-realtime-analyst/1935054.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:52:16+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst-supervisor-medicine/2299813.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:52:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst/2180185.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:53:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst/2295964.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:53:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst/2304208.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:54:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst/2304450.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:54:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-analyst/2313259.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:54:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-annotator-specialist/1981099.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:54:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-architect/2297937.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:55:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-clerk/2293498.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:55:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer-du-an-banking/2290394.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:56:30+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer-leader/2224769.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:58:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer-san-pham-product/2306512.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:58:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer-senior-leader/2168835.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:58:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer-upto-27-tr-gross-lam-t2-den-t6-du-an-onsite-bank/2307790.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:58:54+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer/2220482.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:58:59+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer/2283544.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:59:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer/2297827.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:59:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-engineer/2309145.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T03:59:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-entry-intern/2302828.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:00:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-product-semantic-layer-engineer/2300149.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:00:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-science-expert/2302610.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:01:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/data-scientist-lead/2312435.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:01:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/database-administration/2309279.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:02:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/database-administrator-dba/686108.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:02:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/database-administrator/2260340.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:02:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/delivery-manager/2142956.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:04:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/delivery-manager/2183442.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:04:19+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/design-2d-executive/2219526.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:04:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/design-intern/2110345.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:05:48+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/design-manager-mang-event-activation/2294217.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:08:18+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-chuyen-vien-thiet-ke-do-hoa-2d/2291668.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:08:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-fb-am-thuc-han-quoc-tai-nha-be/2260455.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:08:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-intern/2303459.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:08:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-kiem-video-editor/2309276.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:09:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-nhan-vien-thiet-ke/1896829.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:10:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-pod-ecommerce/2304623.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:10:20+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-thiet-ke-do-hoa-luong-up-to-10-trieu-thuong-phu-cap-da-nang/2305381.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:10:25+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer-visual-marketing-executive/2307336.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:10:45+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer/2175723.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:10:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer/2296437.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:11:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designer/2311828.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:11:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/designers/2189116.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:11:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/developer-tu-1-nam-kinh-nghiem/2305443.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:11:38+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-cloud-engineer-aws-oci-azure/2090636.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:11:58+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-du-an/2291700.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:12:02+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer-ai-product/2230390.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:12:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer-du-an-bank-lead/2296642.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:12:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer-lead/2306245.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:12:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer-mlops-aiops/2301573.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:12:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer-on-premise/2261942.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:13:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer-operation-maintenance/2208738.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:13:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer/1641864.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:13:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer/1950516.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:14:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer/2191444.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:14:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer/2208656.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:14:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer/2309289.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:15:44+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-engineer/2313920.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:15:49+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-manager/2293892.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:16:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/devops-sre-engineer-lam-remote-tu-thu-2-den-thu-6-du-an-edtech-finance/2288681.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:16:13+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/dieu-phoi-vien-it-yeu-cau-nu-ho-chi-minh/2305851.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:17:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/digital-marketing-mobile-app/2213249.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:17:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/dwdm-transmission-engineer/2306184.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:18:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/embedded-developer-intern-fresher/2312820.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:18:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/embedded-tester-integration-verification-tester/2308343.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:18:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/erp-developer/2303605.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:18:51+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/erp-logistics-senior-business-analyst-3-5-years-tai-ho-chi-minh/2238830.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:19:11+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/event-2d-design-supervisor/2303787.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:19:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/expert-devsecops/2274506.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:19:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/flutter-developer-lead/2307645.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:21:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/freelance-developer-web-platform-game/2221536.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:21:21+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fresher-business-development/1481369.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:22:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fresher-mobile-developer-android-ios/2303965.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:23:10+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fresher-software-engineer-tai-nhat-n3/2307742.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:23:15+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fresher-web-developer-gpa-3-2-luong-khoi-diem-tu-15m/2309569.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:24:24+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/frontend-developer-3d-xr/2299555.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:24:44+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/frontend-developer-html-css-shopify-luong-9-15-trieu-tu-1-nam-kinh-nghiem/2291170.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:24:49+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/frontend-developer-leader/2268386.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:25:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/frontend-developer-react-typescript/2311776.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:25:13+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/frontend-developer/2298533.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:25:34+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/frontend-leader-angular/2293877.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:26:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/full-stack-developer-java-javascript-typescript-3-5-nam-kinh-nghiem/2303052.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:27:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/full-stack-developer-onsite-nha-trang-remote/2286894.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:27:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/full-stack-engineer-remote/2298962.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:27:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-c-net-vuejs-luong-upto-40-trieu-thang/2295232.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:28:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-lead/2275745.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:28:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-net-reactjs-angular/2162851.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:28:43+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-php-nodejs-reactjs-sql/2292282.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:29:03+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-reactjs-nodejs-hybrid-working/2299353.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:29:22+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-techlead-track/2305183.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:29:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer-tu-02-nam-kinh-nghiem-tn-len-den-30m/2303679.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:29:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-developer/2300787.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:30:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/fullstack-python-react-js/2294762.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:30:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-2d-animator/2222404.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:31:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-3d-artist/2230931.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:31:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-artist-2d-upto-1000-usd-lam-viec-tai-thao-dien-hcm/2300929.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:33:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-artist-2d/1451306.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:33:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-design-leader-puzzle/2301400.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:33:47+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-design-thiet-ke-kich-ban-game/1607872.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:34:57+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer-f10-up-to-3000-net/2296270.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:36:07+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer-intern/2293827.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:36:27+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer-puzzle-game/1810862.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:37:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer-puzzle/2290241.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:37:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer-puzzle/2294305.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:38:01+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer-senior-level/1595257.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:38:21+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer/1452545.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:38:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer/1965921.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:38:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-designer/2288593.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:39:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-developer/1084464.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:41:56+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-tester/2289773.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:26+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/game-tester/2302476.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:31+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giam-doc-an-ninh-thong-tin-head-of-security/2303222.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:36+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giam-doc-ky-thuat-cong-nghe-thong-tin/2241434.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:41+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giam-doc-phat-trien-doanh-nghiep-chien-luoc/2301981.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:46+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giam-doc-trung-tam-ha-tang-director-of-infrastructure/2260179.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:50+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giam-sat-bi-business-intelligence/2311515.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:44:55+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giam-sat-business-analyst/2307399.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:00+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-an-ninh-mang/1740666.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:04+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-cong-nghe-thong-tin-khoa-hoc-may-tinh/1773238.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:09+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-it-day-automotive/2301970.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:14+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-khoa-cong-nghe-thong-tin/2110793.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:18+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-lap-trinh/2242812.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:23+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-nganh-thiet-ke-do-hoa/1617071.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:28+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-thiet-ke-3d-fulltime/2181423.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:32+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/viec-lam/giang-vien-thiet-ke-do-hoa-3d-quay-dung-phim/2260682.html": {
+      "state": "expired",
+      "reason": "structured_valid_through_passed",
+      "checked_at": "2026-10-28T04:45:37+07:00",
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/barett/tuyen-dung/chuyen-vien-it-j2307815.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:34:06+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T15:34:06+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T15:34:06+07:00"
+            }
+          ]
+        }
+      ],
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/ky-su-giai-phap-ha-tang-presales-system-engineer-j2275800.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:34:29+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T15:34:29+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T15:34:29+07:00"
+            }
+          ]
+        }
+      ],
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/cmctelecom/tuyen-dung/ky-su-tu-van-giai-phap-cloud-cloud-solution-architect-cloud-presales-j1778187.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:34:45+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T15:34:45+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T15:34:45+07:00"
+            }
+          ]
+        }
+      ],
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/educa/tuyen-dung/product-manager-truong-phong-phat-trien-san-pham-san-pham-e-learning-j2266831.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:35:05+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T15:35:05+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T15:35:05+07:00"
+            }
+          ]
+        }
+      ],
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/devops-engineer-on-premise-j1950228.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T15:35:22+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T15:35:22+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T15:35:22+07:00"
+            }
+          ]
+        }
+      ],
+      "skipped_checked_today": true
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/it-business-analyst-product-gis-telco-ai-camera-1000-nghi-thu-7-chu-nhat-j2071611.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T20:59:49+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/it-business-analyst-product-gis-telco-ai-camera-1000-nghi-thu-7-chu-nhat/2071611.html",
+      "page_title": "Tuyển IT Business Analyst (Product, GIS, Telco, AI Camera, $1000, Nghỉ Thứ 7 Chủ Nhật) làm việc tại ELCOM Corporation",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T20:59:49+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T20:59:49+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/viec-lam/product-owner/2303471.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:00:02+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/product-owner-yeu-cau-3-nam-kinh-nghiem/2303471.html",
+      "page_title": "Tuyển Product Owner - Yêu Cầu 3 Năm Kinh Nghiệm làm việc tại Công ty Cổ phần eTelecom",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:00:02+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:00:02+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/java-developer-spring-boot-kafka-product-nghi-thu-7-chu-nhat-j2222082.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:00:15+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/java-developer-spring-boot-kafka-product-nghi-thu-7-chu-nhat/2222082.html",
+      "page_title": "Tuyển Java Developer (Spring Boot, Kafka, Product), Nghỉ Thứ 7 Chủ Nhật làm việc tại ELCOM Corporation",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:00:15+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:00:15+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/junior-network-engineer-service-provider-ip-mpls-j2269581.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:00:28+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/junior-network-engineer-service-provider-ip-mpls/2269581.html",
+      "page_title": "Tuyển Junior Network Engineer (Service Provider,IP,MPLS) làm việc tại ELCOM Corporation",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:00:28+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:00:28+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/ky-su-trien-khai-tich-hop-san-pham-phan-mem-software-integration-deployment-engineer-j2272087.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:00:40+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:00:40+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:00:40+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/manual-tester-domain-camera-ai-j992370.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:00:52+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/manual-tester-domain-camera-ai/992370.html",
+      "page_title": "Tuyển Manual Tester Domain Camera AI làm việc tại ELCOM Corporation",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:00:52+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:00:52+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/elcom/tuyen-dung/senior-network-engineer-service-provider-ip-mpls-j2269566.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:01:05+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/senior-network-engineer-service-provider-ip-mpls/2269566.html",
+      "page_title": "Tuyển Senior Network Engineer (Service Provider,IP,MPLS) làm việc tại ELCOM Corporation",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:01:05+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:01:05+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/galaxydebt/tuyen-dung/data-analyst-lead-nganh-tai-chinh-j2300709.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:01:18+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:01:18+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:01:18+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/genesis/tuyen-dung/2d-graphic-designer-tu-1-nam-kinh-nghiem-j2288601.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:01:29+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:01:29+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:01:29+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/kamereo/tuyen-dung/backend-developer-java-kotlin-j2296650.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:01:41+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:01:41+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:01:41+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/lottemart/tuyen-dung/store-design-intern-ss10-j2315863.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:01:53+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:01:53+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:01:53+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/sapovn/tuyen-dung/business-analyst-ai-applications-j2270080.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:02:05+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:02:05+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:02:05+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/trungsonalpha/tuyen-dung/fullstack-developer-executive-j2305229.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:02:17+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/fullstack-developer-executive/2305229.html",
+      "page_title": "Tuyển FullStack Developer Executive làm việc tại Công Ty TNHH Trung Sơn Alpha",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:02:17+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:02:17+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vnresource1209/tuyen-dung/project-manager-j2252828.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:02:30+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:02:30+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:02:30+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/backend-developer-expert-chuyen-gia-phat-trien-giai-phap-cntt-j2308440.html": {
+      "state": "unknown",
+      "reason": "redirect_or_job_identity_changed",
+      "checked_at": "2026-10-28T21:02:43+07:00",
+      "http_status": 200,
+      "final_url": "https://www.topcv.vn/viec-lam/backend-developer-expert-chuyen-gia-phat-trien-giai-phap-cntt/2308440.html",
+      "page_title": "Tuyển Backend Developer Expert - Chuyên Gia Phát Triển Giải Pháp CNTT làm việc tại Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "unknown",
+          "reason": "redirect_or_job_identity_changed",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:02:43+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_or_job_identity_changed",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "unknown",
+              "reason": "redirect_or_job_identity_changed",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:02:43+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/cg-quan-ly-du-an-senior-po-ta189-j2147617.html": {
+      "state": "expired",
+      "reason": "redirect_to_viec_lam",
+      "checked_at": "2026-10-28T21:02:53+07:00",
+      "http_status": 200,
+      "evidence": "https://www.topcv.vn/viec-lam",
+      "final_url": "https://www.topcv.vn/viec-lam",
+      "page_title": "Tuyển dụng, tìm việc làm 24h, tìm việc nhanh, hiệu quả cùng TopCV",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "redirect_to_viec_lam",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:02:53+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "redirect_to_viec_lam",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "redirect_to_viec_lam",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:02:53+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/chuyen-vien-mua-sam-cong-nghe-thong-tin-id10498-j2290296.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:03:05+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/chuyen-vien-mua-sam-cong-nghe-thong-tin-id10498/2290296.html",
+      "page_title": "Tuyển Chuyên Viên Mua Sắm Công Nghệ Thông Tin - ID10498 làm việc tại Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:03:05+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:03:05+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/cloud-platform-expert-openstack-ha-noi-ta150-j2303756.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:03:18+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/cloud-platform-expert-openstack-ha-noi-ta150/2303756.html",
+      "page_title": "Tuyển Cloud Platform Expert (OpenStack) - Hà Nội - TA150 làm việc tại Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:03:18+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:03:18+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/fullstack-developer-senior-lead-ta180-j2299368.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:03:32+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/fullstack-developer-senior-lead-ta180/2299368.html",
+      "page_title": "Tuyển Fullstack Developer (Senior/Lead) - TA180 làm việc tại Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:03:32+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:03:32+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/network-operator-van-hanh-mang-va-ha-tang-ta180-j2156958.html": {
+      "state": "expired",
+      "reason": "apply_expired_class",
+      "checked_at": "2026-10-28T21:03:45+07:00",
+      "http_status": 200,
+      "evidence": "<div class=\"apply-expired\">\n<i class=\"fa-solid fa-brake-warning\"></i>\n                    Hết hạn ứng tuyển\n                </div>",
+      "final_url": "https://www.topcv.vn/viec-lam/network-operator-van-hanh-mang-va-ha-tang-ta180/2156958.html",
+      "page_title": "Tuyển Network Operator (Vận Hành Mạng Và Hạ Tầng) - TA180 làm việc tại Ngân Hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "expired",
+          "reason": "apply_expired_class",
+          "http_status": 200,
+          "checked_at": "2026-10-28T21:03:45+07:00"
+        }
+      ],
+      "retry_exhausted": false,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "apply_expired_class",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "expired",
+              "reason": "apply_expired_class",
+              "http_status": 200,
+              "checked_at": "2026-10-28T21:03:45+07:00"
+            }
+          ]
+        }
+      ]
+    },
+    "https://www.topcv.vn/brand/vpbank/tuyen-dung/platform-engineering-expert-ha-noi-ta150-j2303825.html": {
+      "state": "unknown",
+      "reason": "blocked_or_rate_limited",
+      "checked_at": "2026-10-28T21:04:33+07:00",
+      "http_status": 429,
+      "attempts": [
+        {
+          "attempt": 1,
+          "reload_number": 0,
+          "request": "goto",
+          "state": "unknown",
+          "reason": "blocked_or_rate_limited",
+          "http_status": 429,
+          "checked_at": "2026-10-28T21:04:33+07:00"
+        }
+      ],
+      "retry_exhausted": true,
+      "retry_after_seconds": 0,
+      "browser_rounds": [
+        {
+          "round": 1,
+          "reason": "blocked_or_rate_limited",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "unknown",
+              "reason": "blocked_or_rate_limited",
+              "http_status": 429,
+              "checked_at": "2026-10-28T21:03:58+07:00"
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "reason": "blocked_or_rate_limited",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "unknown",
+              "reason": "blocked_or_rate_limited",
+              "http_status": 429,
+              "checked_at": "2026-10-28T21:04:10+07:00"
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "reason": "blocked_or_rate_limited",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "unknown",
+              "reason": "blocked_or_rate_limited",
+              "http_status": 429,
+              "checked_at": "2026-10-28T21:04:21+07:00"
+            }
+          ]
+        },
+        {
+          "round": 4,
+          "reason": "blocked_or_rate_limited",
+          "attempts": [
+            {
+              "attempt": 1,
+              "reload_number": 0,
+              "request": "goto",
+              "state": "unknown",
+              "reason": "blocked_or_rate_limited",
+              "http_status": 429,
+              "checked_at": "2026-10-28T21:04:33+07:00"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
